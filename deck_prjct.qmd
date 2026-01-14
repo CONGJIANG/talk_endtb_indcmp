@@ -188,6 +188,37 @@ $\Omega$: target population consisting of individuals at risk of TB recurrence i
 
 ## (1A) Traditional approach: Separate trial analyses
 
+::: {style="font-size: 85%;"}
+**The Core Idea**: Use randomization within each trial, then difference the estimated effects.
+
+What the traditional approach does:
+
+1.  **Analyze each trial separately**: Calculate within trial effect with data from TB-PRACTECAL
+    and endTB separately.
+2.  **Compare the two results**: Take the difference between the two trial-specific effects.
+
+**Strength**: Uses randomization
+
+**Limitation**: Assume both endTB and TB-PRACTECAL has same control arm 
+:::
+
+
+## (1B) Observational Study Approach: Combine treatment arms
+
+::: {style="font-size: 85%;"}
+**The Core Idea**: Ignore control groups and directly compare people who received different treatments.
+
+What the observational approach does:
+
+1.  **Keep only treated participants**: keep people who received 6BPaLM and endTB regimen.
+2.  **Combine treated patients into one dataset**: Everyone in this dataset received an active treatment
+3. **Adjust for differences between patients**
+3. **Compare outcomes**: Differences are attributed to treatment, after adjustment
+
+**key**: We gain simplicity and efficiency by pooling treated arms, but we no longer use randomization—identification relies entirely on covariate adjustment. 
+:::
+
+
 ## Method (2): Direct and Indirect Fusion Method
 
 ::: {style="font-size: 85%;"}
