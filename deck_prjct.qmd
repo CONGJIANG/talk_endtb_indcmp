@@ -216,9 +216,11 @@ If an individual actually receives treatment $a$, then their observed outcome $Y
 . . .
 
 ::: {style="font-size: 85%;"}
-**Key Assumption 2: Exchangeability (No Unmeasured Confounding)**
+**Key Assumption 2: Exchangeability (unconfoundedness)**
 
 After we account for all important patient characteristics (age, disease severity, HIV status, etc.), **treatment assignment is unrelated to what outcomes would have been under different treatments**.
+
+<span style="background-color:#FFF2CC">Can be ganrentted by randomization within each trial. </span>
 :::
 
 . . .
@@ -234,8 +236,28 @@ Information from patients on 6BPaLM in TB-PRACTECAL can tell us what would happe
 . . .
 
 ::: {style="font-size: 85%; background-color: #fff0f0; padding: 10px; border-left: 5px solid #b22222;"}
-The patient populations from the two trials must be similar enough in important characteristics that we can safely "borrow" information across them. **If the trials studied very different types of patients, this method will fail.**
+The patient populations from the two trials must be similar enough in important characteristics that we can safely "borrow" information across them. *If the trials studied very different types of patients, this method will fail.*
 :::
+
+## Key Assumptions (cts)
+::: {style="font-size: 85%;"}
+**Key Assumption 4: Positivity — Treatment assignment**
+
+Within each trial, everyone must have a real chance to receive each treatment.
+:::
+
+. . .
+
+::: {style="font-size: 85%;"}
+**Key Assumption 5: Positivity — Trial participation/inclusion**
+
+Across trials, everyone must have a real chance to be in either trial. 
+
+No group of patients should exist only in one trial and never the other.
+
+If a certain kind of patient (say very sick patients) can only ever appear in trial 1 and never in trial 2, then we cannot use trial 2 to learn about that type of patient.
+:::
+
 
 ## Identification Result (Statistical Estimand)
 
@@ -270,17 +292,18 @@ We implement the Direct Method using three estimation method (1) **g-computation
 
 1. **Outcome Model**: Predicts what the outcome    would be under each treatment, given patient characteristics, $\mu_s(z, L) = \E(Y\mid L,A=z,S=s)$ for any $(s, z) \in \{(1, a), (2, b)\}.$
 
-2. **Inclusion and Treatment Model**: The inclusion (i.e., $g(L) := \mathbb{P}_{\Omega}(S=1\mid L)$) and treatment mechanism (i.e., $\mathbb{P}_{\Omega}(A=z\mid L,S=s)$) are consistently estimated.
+2. **Inclusion and Treatment Model**: The trial inclusion (i.e., $g(L) := \mathbb{P}_{\Omega}(S=1\mid L)$) and treatment mechanism (i.e., $\mathbb{P}_{\Omega}(A=z\mid L,S=s)$) are consistently estimated.
 
+Statistical properities of one-step estimator, such as consistency and asymptotic normality, are established under standard regularity conditions.
 :::
 
 . . .
 
 ::: {style="font-size: 85%; background-color: #f0f8ff; padding: 10px; border-left: 5px solid #4682b4;"}
-Treatment mechanism are known in randomized trials, so only the inclusion model and outcome model need to be estimated, and the doubly-robust property ensures consistency if either is correct (see Appendix for the 2nd order remainder term).
+Treatment mechanism are known in randomized trials, so only the <span style="background-color:#FFF2CC">inclusion model and outcome model </span> need to be estimated "well", and the doubly-robust property ensures consistency if either is correct (see Appendix for the 2nd order remainder term).
 :::
 
-## Strengths & Weaknesses: Finding the Balance
+## Strengths & Weaknesses
 
 ::: {style="font-size: 85%;"}
 **Strengths**: 
@@ -289,11 +312,11 @@ Treatment mechanism are known in randomized trials, so only the inclusion model 
 - **Uses All Data**: Leverages all treatment arms from both trials. 
 - **Doubly Robust**: More reliable, less sensitive to model misspecification. 
 - **Efficient**: Good statistical power, works well even with moderate sample sizes.
+- **Use Randomization**: Implicitly use the fact that the original trials were randomized.
 
 **Challenges & Limitations**: 
 
 - **Assumptions**: Transportability may not hold if trial populations differ substantially.  
-- **Does Not Use Randomization**: Ignores the fact that the original trials were randomized.
 :::
 
 . . .
@@ -308,7 +331,7 @@ The Direct Method lets us “directly compare” treatments that were never test
 :::
 
 
-## Method (2A): Indirect Method – The Decomposition for adjusting differing standard care
+## Method (2A): Indirect Method – decomposition for adjusting differing standard care
 
 ::: {style="font-size: 85%;"}
 **The Core Idea**:
@@ -337,17 +360,21 @@ and $\phi := \mathbb{E}[Y(c_1)-Y(c_2)\mid\Omega],$ the difference between the tw
 ::: {style="font-size: 85%;"}
 
 - **Component 1: Treatment Effect Difference ($\theta$)**
-  - In **TB-PRACTECAL**: 6BPaLM vs. Standard Care 1
-  - In **endTB**: 9-month regimen vs. Standard Care 2
-  - Captures how much better each investigational regimen is compared to its own control
+  - In **TB-PRACTECAL**: 6BPaLM v.s. Standard Care 1
+  - In **endTB**: 9-month regimen v.s. Standard Care 2
+  - Captures how much better each investigational regimen is compared to its own control, i.e., $\theta := \mathbb{E}[Y(a)-Y(c_1)\mid\Omega] - \mathbb{E}[Y(b)-Y(c_2)\mid\Omega]$
 
-$\theta = (\text{Effect of 6BPaLM vs. SC1}) - (\text{Effect of 9-month regimen vs. SC2})$
+ - $(\text{Effect of 6BPaLM vs. SC1}) - (\text{Effect of 9-month regimen vs. SC2})$
+:::
 
+. . .
+
+::: {style="font-size: 85%;"}
 - **Component 2: Standard Care Difference ($\phi$)**
   - Direct comparison: Standard Care 1 vs. Standard Care 2
   - Captures differences in background treatment across trials
-  - Accounts for regional variations in standard care
 
+- $\phi := \mathbb{E}[Y(c_1)-Y(c_2)\mid\Omega]$
 :::
 
 . . .
@@ -357,38 +384,57 @@ $\theta = (\text{Effect of 6BPaLM vs. SC1}) - (\text{Effect of 9-month regimen v
 We can estimate $\phi$ using the **Direct Method** from before, since $\phi := \mathbb{E}\left[ Y(c_1) - Y(c_2) \mid \Omega \right]$ coincides with the pairwise contrast $\phi = \psi(c_1, c_2)$. 
 :::
 
-## Key Assumptions
+## Identification Assumptions (for $\theta$ and $\phi$)
 
-::: {style="font-size: 85%;"}
-**Assumption 1: Within-trial Randomization Still Holds**
-For $\theta$ estimation, we can still use the fact that within each trial, treatment was randomized.
+- **(A1) Consistency**  
 
-**Assumption 2: Different Transportability for Different Parts**
-- For $\phi$ (standard care comparison): We only need to transport across **countries**
-- For $\theta$ (treatment effects): We need to transport across **all patient characteristics**
+- **(A2) Exchangeability within each trial**  
+  - Trial 1: $Y(a), Y(c_1)\perp\!\!\perp A \mid L,S=1$  
+  - Trial 2: $Y(b), Y(c_2)\perp\!\!\perp A \mid L,S=2$
 
-**Assumption 3: Positivity**
-Patients in both trials have some chance of receiving either treatment in their respective trial.
-:::
+- **(A3) Positivity of treatment within trial**  
 
-. . .
+  Everyone in each trial has a non-zero chance to receive every treatment arm.
 
-::: {style="font-size: 85%; background-color: #f0f8ff; padding: 10px; border-left: 5px solid #4682b4;"}
-**The Clever Part**:  
-We use randomization where we can (within trials for treatment effects), and we make weaker assumptions for the standard care comparison.
-:::
+- **(A4) Transportability** : $Y(a),Y(c_1), Y(b), Y(c_2)\perp\!\!\perp S \mid L$
+
+- **(A5) Positivity of trial inclusion**  
+
+  For any covariate profile $L$, a subject must have a chance to be in both trials.
+
+
+
+
+## Identification of $\theta$
+
+Decomposing $\theta := \underbrace{\mathbb{E}[Y(a) - Y(c_1) \mid \Omega]}_{\theta_1} - \underbrace{\mathbb{E}[Y(b) - Y(c_2) \mid \Omega]}_{\theta_2},$ we have: for $\theta_1$
+\begin{align}\label{thetaid}
+\mathbb{E}_{L \mid S = 1}& \left[ \mathbb{E}[Y \mid A = a, L, S = 1] - \mathbb{E}[Y \mid A = c_1, L, S = 1] \right] \mathbb{P}(S = 1)  \nonumber \\
++ \mathbb{E}_{L \mid S = 2} &\left[ \mathbb{E}[Y \mid A = a, L, S = 1] - \mathbb{E}[Y \mid A = c_1, L, S = 1] \right] \mathbb{P}(S = 2)
+\end{align}
+
+or equivalently, $\theta_1$ can be identified as the following IPW form,
+\begin{align*}
+&\mathbb{E}\!\left[\frac{\mathbb{I}(A=a)\mathbb{I}(S=1)Y}{\mathbb{P}(A=a \mid L, S=1)} - \frac{\mathbb{I}(A=c_1)\mathbb{I}(S=1)Y\, }{\mathbb{P}(A=c_1 \mid L, S=1)}\right] \\ +& \mathbb{E}\!\left[\frac{\mathbb{I}(A=a)\mathbb{I}(S=1)Y\, \delta(L)}{\mathbb{P}(A=a \mid L, S=1)} - \frac{\mathbb{I}(A=c_1)\mathbb{I}(S=1)Y\delta(L)}{\mathbb{P}(A=c_1 \mid L, S=1)}\right]
+\end{align*}
+
+where $\delta(L):=
+\frac{\mathbb{P}_{\Omega}(S = 2 \mid L)}{\mathbb{P}_{\Omega}(S = 1 \mid L)} = \frac{1 - \mathbb{P}_{\Omega}(S = 1 \mid L)}{\mathbb{P}_{\Omega}(S = 1 \mid L)}.$
+
+  <span style="background:#E6F7FF">
+  There are 4 terms in the above identification formulas, corresponding to 2 components across 2 trials.
+  </span>
+
 
 ## How It Works: Combining the Pieces
-
 ::: {style="font-size: 85%;"}
 - **Step 1: Estimate Standard Care Difference**, $\hat{\phi}$
-  - Use the Direct Method to compare SC1 vs. SC2
-  - This tells us how different the background treatments are
+  - Use the Direct Method to compare SC1 v.s. SC2
 
 - **Step 2: Estimate Treatment Effect Difference,** $\hat{\theta}$
-  - Estimate 6BPaLM effect vs. SC1 in TB-PRACTECAL, and 9-month effect vs. SC2 in endTB
-  - Transport these effects to the combined population
-  - Take the difference: $\theta$ = (6BPaLM effect) - (9-month effect)
+  - Estimate 6BPaLM effect v.s. SC1 in TB-PRACTECAL, and 9-month effect vs. SC2 in endTB
+  - Transport these effects to the combined population (4 terms in the identification formula)
+
 
 - **Step 3: Add Them Up**
 $\hat{\psi}(a, b)$ = $\hat{\theta}$ + $\hat{\phi}$
@@ -410,7 +456,7 @@ $\hat{\psi}(a, b)$ = $\hat{\theta}$ + $\hat{\phi}$
   - **Flexible assumptions** — weaker assumptions for the standard care comparison
 
 - **Challenges**
-  - **More complex** — requires estimating two components
+  - **More complex** — requires estimating two components (8 total key terms)
   - **Multiple assumptions** — each component has its own requirements
 
 :::
