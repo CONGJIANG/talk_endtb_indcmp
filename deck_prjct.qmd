@@ -206,12 +206,11 @@ That’s exactly what the Direct Fusion Method does:
 **key**: Pretend we have one large observational study with patients on either 6BPaLM or a 9-month regimen, then statistically adjust to make the groups comparable.
 :::
 
-## Method (2B): Direct Fusion Method
+## Method (2B): Direct Method
 
 ::: {style="font-size: 85%;"}
 **Key Assumption 1: Consistency**
-
-The outcomes we actually observe in the data are the same outcomes that would occur under the treatments patients actually received.
+If an individual actually receives treatment $a$, then their observed outcome $Y$ is equal to their potential outcome $Y(a)$. This implicitly assumes that there are no multiple versions of the treatment, no interference.
 :::
 
 . . .
@@ -220,14 +219,12 @@ The outcomes we actually observe in the data are the same outcomes that would oc
 **Key Assumption 2: Exchangeability (No Unmeasured Confounding)**
 
 After we account for all important patient characteristics (age, disease severity, HIV status, etc.), **treatment assignment is unrelated to what outcomes would have been under different treatments**.
-
-**Explanation**: If we perfectly adjust for patient differences, who gets which treatment looks "as good as random."
 :::
 
 . . .
 
 ::: {style="font-size: 85%;"}
-**Key Assumption 3: Transportability**
+**Key Assumption 3: Transportability**: $Y(a),Y(b)\perp\!\!\perp S\mid L$
 
 Information from patients on 6BPaLM in TB-PRACTECAL can tell us what would happen if endTB patients took 6BPaLM, and vice versa.
 
@@ -240,55 +237,78 @@ Information from patients on 6BPaLM in TB-PRACTECAL can tell us what would happe
 The patient populations from the two trials must be similar enough in important characteristics that we can safely "borrow" information across them. **If the trials studied very different types of patients, this method will fail.**
 :::
 
+## Identification Result (Statistical Estimand)
+
+::: {style="font-size: 85%;"}
+Identification of the parameter of interest $\psi$
+\begin{align}\label{psiid}
+\psi(a, b) &:=  \mathbb{E}[Y(a) - Y(b) \mid \Omega] \nonumber \\
+    &= \mathbb{E}_{L\mid S=1}[\mathbb{E}(Y \mid A = a, L, S =1)] \mathbb{P}_{\Omega}(S=1) \\ &\ \ \ \ + \mathbb{E}_{L\mid S=2}[\mathbb{E}(Y \mid A = a, L, S =1)] \mathbb{P}_{\Omega}(S=2) \nonumber \\ &\ \ \ \ - \mathbb{E}_{L\mid S=1}[\mathbb{E}(Y \mid A = b, L, S =2)] \mathbb{P}_{\Omega}(S=1)  \\ &\ \ \ \ - \mathbb{E}_{L\mid S=2}[\mathbb{E}(Y \mid A = b, L, S =2)] \mathbb{P}_{\Omega}(S=2),
+\end{align}
+where $S=1$ indicates TB-PRACTECAL and $S=2$ indicates endTB.
+
+or equivalently, $\psi$ can be identified as the following IPW form
+\begin{align}\label{psiid2}
+\psi(a, b) &:=  \mathbb{E}[Y(a) - Y(b) \mid \Omega] \nonumber \\
+&= 
+\mathbb{E}\!\left[\frac{\mathbb{I}(A=a)\mathbb{I}(S=1)Y}{\mathbb{P}_{\Omega}(A=a \mid L, S=1)}\right]
++ \mathbb{E}\!\left[\frac{\mathbb{I}(A=a)\mathbb{I}(S=1)Y\, \delta(L)}{\mathbb{P}_{\Omega}(A=a \mid L, S=1)}\right] \nonumber \\
+&\quad - \mathbb{E}\!\left[\frac{\mathbb{I}(A=b)\mathbb{I}(S=2)Y\, \delta^{-1}(L)}{\mathbb{P}_{\Omega}(A=b \mid L, S=2)}\right]- \mathbb{E}\!\left[\frac{\mathbb{I}(A=b)\mathbb{I}(S=2)Y}{\mathbb{P}_{\Omega}(A=b \mid L, S=2)}\right],
+\end{align}
+where $\delta(L):=
+\frac{\mathbb{P}_{\Omega}(S = 2 \mid L)}{\mathbb{P}_{\Omega}(S = 1 \mid L)} = \frac{1 - \mathbb{P}_{\Omega}(S = 1 \mid L)}{\mathbb{P}_{\Omega}(S = 1 \mid L)}.$
+:::
+
+
+
 ## Estimation
 
 ::: {style="font-size: 85%;"}
-We implement the Direct Fusion Method using three estimation method (1) **g-computation** (2) **IPW** and (3) **one-step/doubly robust estimation**:
+We implement the Direct Method using three estimation method (1) **g-computation** (2) **IPW** and (3) **one-step/doubly-robust estimation**:
 
-**Doubly Robust Means**: - We build two models at the same time: 1. **Outcome Model**: Predicts what the outcome would be under each treatment, given patient characteristics. 2. **Treatment Model**: Predicts which treatment a patient would receive, given their characteristics.
+**Doubly-Robust**: The one-step estimator is consistent if either the outcome model or the inclusion and treatment model is correctly specified.
 
--   Our estimate is reliable if **at least one of these two models is correct**.
+1. **Outcome Model**: Predicts what the outcome    would be under each treatment, given patient characteristics, $\mu_s(z, L) = \E(Y\mid L,A=z,S=s)$ for any $(s, z) \in \{(1, a), (2, b)\}.$
 
-We can never be sure which model is exactly right. Doubly robust methods give us “two chances” to get the right answer, making our results much more trustworthy.
+2. **Inclusion and Treatment Model**: The inclusion (i.e., $g(L) := \mathbb{P}_{\Omega}(S=1\mid L)$) and treatment mechanism (i.e., $\mathbb{P}_{\Omega}(A=z\mid L,S=s)$) are consistently estimated.
+
 :::
 
 . . .
 
 ::: {style="font-size: 85%; background-color: #f0f8ff; padding: 10px; border-left: 5px solid #4682b4;"}
-**In Our Study**: 1. Merge IPD from TB-PRACTECAL and endTB. 2. Use doubly robust estimation, adjusting for country, BMI, HIV status, and other key covariates. 3. Directly compare 6BPaLM against each 9-month regimen in the combined population (especially in PLHIV).
+Treatment mechanism are known in randomized trials, so only the inclusion model and outcome model need to be estimated, and the doubly-robust property ensures consistency if either is correct (see Appendix for the 2nd order remainder term).
 :::
 
 ## Strengths & Weaknesses: Finding the Balance
 
 ::: {style="font-size: 85%;"}
-**Strengths**: - **Intuitive**: Directly compares the treatments of interest—easy to explain to clinicians. - **Uses All Data**: Leverages all treatment arms from both trials. - **Doubly Robust**: More reliable, less sensitive to model misspecification. - **Efficient**: Good statistical power, works well even with moderate sample sizes.
+**Strengths**: 
 
-**Challenges & Limitations**: - **Strong Assumptions**: Transportability may not hold if trial populations differ substantially. - **Requires Many Covariates**: Must measure and adjust for all important confounding factors. - **Does Not Use Randomization**: Ignores the fact that the original trials were randomized.
+- **Intuitive**: Directly compares the treatments of interest—easy to explain to clinicians. 
+- **Uses All Data**: Leverages all treatment arms from both trials. 
+- **Doubly Robust**: More reliable, less sensitive to model misspecification. 
+- **Efficient**: Good statistical power, works well even with moderate sample sizes.
+
+**Challenges & Limitations**: 
+
+- **Assumptions**: Transportability may not hold if trial populations differ substantially.  
+- **Does Not Use Randomization**: Ignores the fact that the original trials were randomized.
 :::
 
 . . .
 
-::: {style="font-size: 85%;"}
-**Why We Chose This Method**: For our research question (“Is 6BPaLM better than 9-month regimens for PLHIV?”), the Direct Fusion Method: - Gives the most direct answer - Allows focused analysis of the HIV subgroup - The doubly robust property gives us more confidence in the results
-:::
 
-## Summary: Direct Fusion Method
+## Summary: Direct Method
 
 ::: {style="font-size: 85%;"}
-**In One Sentence**: The Direct Fusion Method lets us “directly compare” treatments that were never tested head-to-head in the same trial, by combining trial data and applying advanced statistical adjustment.
+The Direct Method lets us “directly compare” treatments that were never tested head-to-head in the same trial, by combining trial data and applying advanced statistical adjustment.
 
 **For Our Research**: This is **one of the most straightforward and robust approaches** to answer whether 6BPaLM is preferable to 9-month regimens for people living with HIV, provided the trial populations are sufficiently similar.
 :::
 
-. . .
 
-::: {style="font-size: 85%; background-color: #e6f7ff; padding: 10px; border-left: 5px solid #0077b6;"}
-**Next**: We’ll see how this method compares to the other three approaches, and why it’s particularly suited to our research question.
-:::
-
-
-
-## Method (2A): Indirect Method – The Clever Decomposition
+## Method (2A): Indirect Method – The Decomposition for adjusting differing standard care
 
 ::: {style="font-size: 85%;"}
 **The Core Idea**:
@@ -337,7 +357,7 @@ $\theta = (\text{Effect of 6BPaLM vs. SC1}) - (\text{Effect of 9-month regimen v
 We can estimate $\phi$ using the **Direct Method** from before, since $\phi := \mathbb{E}\left[ Y(c_1) - Y(c_2) \mid \Omega \right]$ coincides with the pairwise contrast $\phi = \psi(c_1, c_2)$. 
 :::
 
-## Key Assumptions: Why This Decomposition Works
+## Key Assumptions
 
 ::: {style="font-size: 85%;"}
 **Assumption 1: Within-trial Randomization Still Holds**
@@ -398,7 +418,7 @@ $\hat{\psi}(a, b)$ = $\hat{\theta}$ + $\hat{\phi}$
 . . .
 
 ::: {style="font-size: 85%; background-color: #e6f7ff; padding: 10px; border-left: 5px solid #0077b6;"}
-When standard care differs substantially between trials, this method **explicitly accounts for that difference**, making it potentially more accurate than approaches that ignore it.
+When standard care differs substantially between trials, this method **explicitly accounts for that difference**, making it potentially more accurate than the traditional approach.
 :::
 
 
