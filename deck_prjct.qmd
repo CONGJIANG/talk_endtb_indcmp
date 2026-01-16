@@ -128,19 +128,29 @@ Because a new head-to-head RCT is unlikely in the near term, we need to make the
 ::: {style="font-size: 85%;"}
 :::
 
+## Data Structure and Notation
+::: {style="font-size: 85%;"}
+endTB trial $s = 1$ and TB-PRACTECAL trial $s = 2$ endTB trial $s = 1$ and TB-PRACTECAL trial and simple randome sapling from the target population $\Omega$ to each trial population $\Omega_{s=1}$ and $\Omega_{s=2}$.
+:::
+
 ## Overview of four data fusion methods
 
-::: {style="font-size: 75%; background-color: #e6f7ff; padding: 10px; border-left: 5px solid #0077b6;"}
-Target population of interest $\Omega$: consisting of individuals at risk of TB recurrence in countries hosting enrollment sites for either the endTB or TB-PRACTECAL trials.
+::: {style="font-size: 80%; background-color: #fff0f0; padding: 3px; border-left: 3px solid #b22222;"}
+Target population of interest $\Omega$: consisting of individuals at risk of TB recurrence in countries hosting enrollment sites for <span style="background-color:#FFF2CC">either the endTB or TB-PRACTECAL trials <span>.
+:::
+
+::: {style="font-size: 75%;"}
+$\Omega = \Omega_{s=1} \cup \Omega_{s=2},$ where $\Omega_{s=1}$ and $\Omega_{s=2}$ denote the target population of endTB and TB-PRACTECAL, respectively.
 :::
 
 . . .
 
 ::: {style="font-size: 75%;"}
+
 | Method | Key Idea | Target Population |
-|--------------|------------------------------------------------|--------------|
+|--------------|----------------------------------------------------|------------|
 | **(1) Meta-analytic Approach** | Compare each treatment v.s. its own control in each trial, then difference the effects | $\Omega$ (Pooled) |
-| **(2) Target trial emulation Approach** | Combine treatment arms, analyze as observational study | $\Omega$ (Pooled) |
+| **(2) Target trial emulation Approach** | Combine treatment arms, analyze as an observational study | $\Omega$ (Pooled) |
 | **(3) Direct Method** | Estimate direct contrast by pooling data and adjusting for trial differences | $\Omega$ (Pooled) |
 | **(4) Indirect Method** | Decompose contrast into treatment effect difference + control effect difference | $\Omega$ (Pooled) |
 :::
@@ -148,7 +158,7 @@ Target population of interest $\Omega$: consisting of individuals at risk of TB 
 . . .
 
 ::: {style="font-size: 80%;"}
-**All methods aim to estimate the casual estimand**: $$\psi(a, b) = \mathbb{E}[Y(a) - Y(b) \mid \Omega]$$ where $Y(a)$ denotes the potential outcome under the 6BPaLM regimen, $Y(b)$ denotes the potential outcome under an endTB regimen (9BLMZ, 9BCLLfxZ, or 9BDLLfxZ).
+**All methods aim to estimate the casual estimand**: $$\psi(a, b) = \mathbb{E}[Y(a) - Y(b) \mid \Omega],$$ where $Y(a)$ denotes the potential outcome under the 6BPaLM regimen, $Y(b)$ denotes the potential outcome under an endTB regimen (9BLMZ, 9BCLLfxZ, or 9BDLLfxZ).
 :::
 
 <!-- . . .
