@@ -29,79 +29,92 @@ bibliography: refs.bib
 csl: https://www.zotero.org/styles/journal-of-the-royal-statistical-society
 ---
 
-## Global burden of TB, HIV, and their intersection
+
+## MDR/RR-TB and HIV
 
 ::: {style="font-size: 85%;"}
--   Tuberculosis (TB) remains a **leading infectious disease killer** worldwide.
--   An estimated **40 million people** were living with HIV in 2022.
--   **Drug-resistant TB (MDR/RR-TB)** causes \~500,000 new cases and 200,000 deaths annually.
--   For people living with HIV (PLHIV), **TB is the leading cause of death** (33%).
--   The convergence of these epidemics creates a critical public health challenge.
+- **Drug-resistant TB (MDR/RR-TB)** remains a major global cause of preventable morbidity and mortality.
+- People living with HIV (PLHIV) face substantially higher TB risk, and **TB is a leading cause of death among PLHIV**.
+- Clinicians and programs need evidence to choose among **new all-oral regimens** in immunocompromised populations. 
 :::
 
-. . .
-
-::: {style="font-size: 85%; background-color: #f0f8ff; padding: 10px; border-left: 5px solid #4682b4;"}
-**Key message**: MDR/RR-TB in PLHIV is a high-mortality, evidence-scarce condition.
-:::
 
 ## New hope: shorter, all-oral MDR/RR-TB regimens
 
 ::: {style="font-size: 85%;"}
-Recent trials have introduced **short-course, all-oral regimens** for MDR/RR-TB:
+Recent trials introduced **short-course, all-oral regimens**:
 
--   **TB-PRACTECAL trial** (Nyang’wa et al., 2022, 2024):
-    -   6-month regimen: **6BPaLM** (Bedaquiline, Pretomanid, Linezolid, Moxifloxacin)
-    -   Non-inferior to standard care.
--   **endTB trial** (Guglielmetti et al., 2025):
-    -   9-month regimens: **9BLMZ, 9BCLLfxZ, 9BDLLfxZ**
-    -   Non-inferior to standard care.
+- **TB-PRACTECAL** (Nyang’wa et al., 2022, 2024)  
+  - 6-month regimen: **6BPaLM** (Bedaquiline + Pretomanid + Linezolid + Moxifloxacin)
+  - Non-inferior vs standard care
+
+- **endTB** (Guglielmetti et al., 2025)  
+  - 9-month regimens: **9BLMZ, 9BCLLfxZ, 9BDLLfxZ**
+  - Non-inferior vs standard care
+
+**Standard cares are** 
+
+- TB-PRACTECAL: 9–12 or 18–20 month all-oral regimens (region-specific) 
+- endTB: 18–20 month all-oral regimens (region-specific) 
 :::
 
-. . .
-
-::: {style="font-size: 85%; background-color: #fff0f0; padding: 10px; border-left: 5px solid #b22222;"}
-**But**: No head-to-head comparisons exist between these regimens.
-:::
-
-## WHO guidance and the evidence gap in PLHIV
+## The decision problem: no head-to-head evidence 
 
 ::: {style="font-size: 85%;"}
--   **WHO 2025 guidelines** recommend eight all-oral regimens for MDR/RR-TB.
--   Prioritize **6BPaLM** (6-month) over 9-month regimens due to shorter duration.
--   **All recommendations are based on low-certainty evidence**.
+- WHO guidelines recommend multiple **all-oral** MDR/RR-TB regimens; shorter regimens are appealing for feasibility and adherence.
+- However, **comparative evidence between 6-month and 9-month regimens is limited**, and certainty is often low.
 
-. . .
-
-**Critical limitation**: - Historically, PLHIV were excluded from TB trials. - Current evidence is **not specific to PLHIV**. - Effect of HIV co-infection on regimen efficacy remains unknown.
 :::
 
 . . .
 
 ::: {style="font-size: 85%; background-color: #f8f8f8; padding: 10px; border-left: 5px solid #2e8b57;"}
-**Question**: Is 6BPaLM truly preferable to 9-month regimens in immunocompromised populations like PLHIV?
+**Question**: Is **6BPaLM** truly preferable to **9-month regimens**?
 :::
 
-## The data fusion challenge
+
+## What data we have: two high-quality RCTs
 
 ::: {style="font-size: 85%;"}
-We have two high-quality RCTs: - **TB-PRACTECAL** (6BPaLM vs. standard care) - **endTB** (9-month regimens vs. standard care)
+We have individual patient data (IPD) from two non-inferiority RCTs:
 
-**But**: - Different standard-of-care arms across regions and time. - No common treatment arm between trials. - Limited sample size of PLHIV in each trial.
+| Feature | TB-PRACTECAL | endTB |
+|---------------------|---------------------------------|------------------|
+| **Duration** | 6-month regimens | 9-month regimens |
+| **Standard care** | 9–12 or 18–20 month all-oral regimens (region-specific) | 18–20 month all-oral regimens (region-specific) |
+| **Study regions** | Eastern Europe, Central Asia, Southern Africa | South Asia, Latin America, Eastern Europe, Africa |
+| **Primary outcome** | Composite unfavorable outcome | Favorable outcome |
+| **Assessment time** | 72 weeks | 73 weeks |
 :::
 
 . . .
 
 ::: {style="font-size: 85%;"}
-**We cannot conduct a new RCT** – must leverage existing data through **cross-trial data fusion**.
+**But**:
+
+1) **No head-to-head regimen comparison** (no common arm)  
+2) **Heterogeneous standard care** (region/time-specific)  
+3) **Population and setting differences** across trial regions (affects transportability)
 :::
 
-## Research aims
+. . .
 
 ::: {style="font-size: 85%;"}
-**Primary aim**: Compare the efficacy of 6BPaLM versus each endTB regimen (9BLMZ, 9BCLLfxZ, 9BDLLfxZ) **in PLHIV**.
+Because a new head-to-head RCT is unlikely in the near term, we need to make the best possible use of existing evidence through cross-trial data fusion.
+:::
 
-**Approach**: - Use **target trial emulation** framework (Hernán & Robins, 2016). - Pool individual patient data (IPD) from both trials. - Apply **causal data fusion methods** to estimate direct contrasts.
+## Aim and Approaches
+
+::: {style="font-size: 85%;"}
+**Primary aim**: Compare the efficacy of 6BPaLM versus each endTB regimen (9BLMZ, 9BCLLfxZ, 9BDLLfxZ).
+
+**Approaches**: 
+
+  - **Meta-analytic** approach: apply **meta analysis** to estimate direct contrasts.
+  - **Target trial emulation** approach: use target trial emulation framework (Hernán & Robins, 2016), then analysis as an observational study. 
+  - **Pooled-IPD “direct” and "indirect" strategy**: Pool individual patient data (IPD) from both trials (direct and indirect method), as like apply to estimate direct contrast and the apply causaibility to estimate indirect contrast through standard care. 
+
+
 :::
 
 . . .
@@ -110,69 +123,27 @@ We have two high-quality RCTs: - **TB-PRACTECAL** (6BPaLM vs. standard care) - *
 **In this talk**, we will introduce four methodological strategies for data fusion in this cross-trial setting.
 :::
 
-## Overview of source trials: TB-PRACTECAL vs. endTB
+## Method Review
 
 ::: {style="font-size: 85%;"}
-**TB-PRACTECAL** (Nyang’wa et al., 2022, 2024): - **Design**: Phase 2/3 non-inferiority RCT - **Countries**: South Africa, Belarus, Uzbekistan - **Regimens tested**: 6-month all-oral regimens vs. standard care - **Key finding**: 6BPaLM non-inferior to standard care - **Primary endpoint**: Composite unfavorable outcome at 72 weeks
-
-**endTB** (Guglielmetti et al., 2025): - **Design**: Phase 3 non-inferiority RCT - **Countries**: Georgia, India, Kazakhstan, Lesotho, Pakistan, Peru, South Africa - **Regimens tested**: 9-month all-oral regimens vs. standard care - **Key finding**: 9BLMZ, 9BCLLfxZ, 9BDLLfxZ non-inferior to standard care - **Primary endpoint**: Favorable outcome at 73 weeks
-:::
-
-. . .
-
-::: {style="font-size: 85%; background-color: #f0f8ff; padding: 10px; border-left: 5px solid #4682b4;"}
-**Common features**: - Sponsored by Médecins Sans Frontières (MSF) - Did not restrict enrollment of PLHIV - Used coordinated pharmacovigilance - Both demonstrate efficacy of shortened regimens
-:::
-
-## Key differences between trials
-
-::: {style="font-size: 85%;"}
-| Feature | TB-PRACTECAL | endTB |
-|---------------------|---------------------------------|------------------|
-| **Duration** | 6-month regimens | 9-month regimens |
-| **Standard care** | 9–12 or 18–20 month all-oral regimens (region-specific) | 18–20 month all-oral regimens (region-specific) |
-| **Study regions** | Eastern Europe, Central Asia, Southern Africa | South Asia, Latin America, Eastern Europe, Africa |
-| **Primary outcome** | Composite unfavorable outcome | Favorable outcome |
-| **Assessment time** | 72 weeks | 73 weeks |
-| **Sample size PLHIV** | Limited | Limited |
-:::
-
-. . .
-
-::: {style="font-size: 85%;"}
-**Critical implication**: - Standard care differs **both across regions and over time** - Direct comparison is **not straightforward** due to differing controls - PLHIV subgroup analyses are underpowered in each trial alone
-:::
-
-## Challenges for cross-trial data fusion
-
-::: {style="font-size: 85%;"}
-**1. No head-to-head comparison** - Trials compared regimens to **different standard-of-care arms** - No common treatment arm between trials
-
-**2. Heterogeneity in standard care** - Standard care varied by country and enrollment period - Changes in WHO guidelines during trial periods
-
-**3. Regional and population differences** - Limited overlap in study regions - Different background epidemiology, healthcare systems
-
-**4. Limited PLHIV sample size** - Though inclusive, PLHIV subgroups remain small in each trial - Traditional meta-analysis insufficient for subgroup inference
-:::
-
-. . .
-
-::: {style="font-size: 85%; background-color: #fff0f0; padding: 10px; border-left: 5px solid #b22222;"}
-**We need causal data fusion methods** that can: - Combine IPD from both trials - Account for differing standard care - Estimate direct contrasts between investigational regimens - Provide valid inference for PLHIV subgroup
 :::
 
 ## Overview of four data fusion methods
 
-::: {style="font-size: 75%;"}
-| Method | Key Idea | Target Population |
-|--------------|---------------------------------------------|--------------|
-| **(1A) Traditional Approach** | Compare each treatment vs. its own control, then difference the effects | $\Omega$ (Pooled) |
-| **(1B) Observational Study Approach** | Combine treatment arms, analyze as observational study with covariate adjustment | $\Omega$ (Pooled) |
-| **(2A) Indirect Method** | Decompose contrast into treatment effect difference + control effect difference | $\Omega$ (Pooled) |
-| **(2B) Direct Method** | Estimate direct contrast by pooling data and adjusting for trial differences | $\Omega$ (Pooled) |
+::: {style="font-size: 75%; background-color: #e6f7ff; padding: 10px; border-left: 5px solid #0077b6;"}
+Target population of interest $\Omega$: consisting of individuals at risk of TB recurrence in countries hosting enrollment sites for either the endTB or TB-PRACTECAL trials.
 :::
 
-$\Omega$: target population consisting of individuals at risk of TB recurrence in countries hosting enrollment sites for either the endTB or TB-PRACTECAL trials.
+. . .
+
+::: {style="font-size: 75%;"}
+| Method | Key Idea | Target Population |
+|--------------|------------------------------------------------|--------------|
+| **(1) Meta-analytic Approach** | Compare each treatment v.s. its own control in each trial, then difference the effects | $\Omega$ (Pooled) |
+| **(2) Target trial emulation Approach** | Combine treatment arms, analyze as observational study | $\Omega$ (Pooled) |
+| **(3) Direct Method** | Estimate direct contrast by pooling data and adjusting for trial differences | $\Omega$ (Pooled) |
+| **(4) Indirect Method** | Decompose contrast into treatment effect difference + control effect difference | $\Omega$ (Pooled) |
+:::
 
 . . .
 
@@ -180,11 +151,11 @@ $\Omega$: target population consisting of individuals at risk of TB recurrence i
 **All methods aim to estimate the casual estimand**: $$\psi(a, b) = \mathbb{E}[Y(a) - Y(b) \mid \Omega]$$ where $Y(a)$ denotes the potential outcome under the 6BPaLM regimen, $Y(b)$ denotes the potential outcome under an endTB regimen (9BLMZ, 9BCLLfxZ, or 9BDLLfxZ).
 :::
 
-. . .
+<!-- . . .
 
 ::: {style="font-size: 80%; background-color: #e6f7ff; padding: 10px; border-left: 5px solid #0077b6;"}
 **Next**: We will examine each method in detail—their causal assumptions, statistical estimand, estimators, and implications for our cross-trial comparison.
-:::
+::: -->
 
 ## (1A) Traditional approach: Separate trial analyses
 
@@ -514,4 +485,70 @@ By separating treatment effects from background care differences, we get a clear
 ::: {style="font-size: 85%; background-color: #f0f8ff; padding: 10px; border-left: 5px solid #4682b4;"}
 **For Our Study**:  
 This method is particularly valuable because TB-PRACTECAL and endTB had different standard care regimens—something we can't ignore when comparing their results.
+:::
+
+
+
+
+
+## Overview of source trials: TB-PRACTECAL vs. endTB
+
+::: {style="font-size: 85%;"}
+**TB-PRACTECAL** (Nyang’wa et al., 2022, 2024): 
+
+-  **Design**: Phase 2/3 non-inferiority RCT 
+-  **Countries**: South Africa, Belarus, Uzbekistan 
+-  **Regimens tested**: 6-month all-oral regimens vs. standard care 
+-  **Key finding**: 6BPaLM non-inferior to standard care 
+-  **Primary endpoint**: Composite unfavorable outcome at 72 weeks
+
+**endTB** (Guglielmetti et al., 2025): 
+
+-  **Design**: Phase 3 non-inferiority RCT 
+-  **Countries**: Georgia, India, Kazakhstan, Lesotho, Pakistan, Peru, South Africa 
+-  **Regimens tested**: 9-month all-oral regimens vs. standard care 
+-  **Key finding**: 9BLMZ, 9BCLLfxZ, 9BDLLfxZ non-inferior to standard care 
+-  **Primary endpoint**: Favorable outcome at 73 weeks
+:::
+
+
+## Key differences between trials
+
+::: {style="font-size: 85%;"}
+| Feature | TB-PRACTECAL | endTB |
+|---------------------|---------------------------------|------------------|
+| **Duration** | 6-month regimens | 9-month regimens |
+| **Standard care** | 9–12 or 18–20 month all-oral regimens (region-specific) | 18–20 month all-oral regimens (region-specific) |
+| **Study regions** | Eastern Europe, Central Asia, Southern Africa | South Asia, Latin America, Eastern Europe, Africa |
+| **Primary outcome** | Composite unfavorable outcome | Favorable outcome |
+| **Assessment time** | 72 weeks | 73 weeks |
+:::
+
+. . .
+
+::: {style="font-size: 85%;"}
+**Critical implication**: 
+
+- Standard care differs **both across regions and over time** 
+- Direct comparison is **not straightforward** due to differing controls 
+:::
+
+## Challenges for cross-trial data fusion
+
+::: {style="font-size: 85%;"}
+**1. No head-to-head comparison** - Trials compared regimens to **different standard-of-care arms** - No common treatment arm between trials
+
+**2. Heterogeneity in standard care** - Standard care varied by country and enrollment period - Changes in WHO guidelines during trial periods
+
+**3. Regional and population differences** - Limited overlap in study regions - Different background epidemiology, healthcare systems
+:::
+
+. . .
+
+::: {style="font-size: 85%; background-color: #fff0f0; padding: 10px; border-left: 5px solid #b22222;"}
+**We need causal data fusion methods** that can: 
+
+- Combine IPD from both trials 
+- Account for differing standard care 
+- Estimate direct contrasts between investigational regimens 
 :::
