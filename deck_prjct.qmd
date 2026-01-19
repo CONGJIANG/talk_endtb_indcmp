@@ -106,21 +106,20 @@ Because a new head-to-head RCT is unlikely in the near term, we need to make the
 ## Aim and Approaches
 
 ::: {style="font-size: 85%;"}
-**Primary aim**: Compare the efficacy of 6BPaLM versus each endTB regimen (9BLMZ, 9BCLLfxZ, 9BDLLfxZ).
+**Primary aim**: Compare the efficacy of 6BPaLM versus endTB regimen (9BLMZ, 9BCLLfxZ, 9BDLLfxZ).
 
 **Approaches**: 
 
   - **Meta-analytic** approach: apply **meta analysis** to estimate direct contrasts.
   - **Target trial emulation** approach: use target trial emulation framework (Hernán & Robins, 2016), then analysis as an observational study. 
-  - **Pooled-IPD “direct” and "indirect" strategy**: Pool individual patient data (IPD) from both trials (direct and indirect method), as like apply to estimate direct contrast and the apply causaibility to estimate indirect contrast through standard care. 
-
-
+  - **Pooled-IPD “direct” strategy**: Pool individual patient data (IPD) from both trials and estimate the direct head-to-head contrast between the two treatments of intests.
+  - **Pooled-IPD “indirect” strategy**: Pool IPD from both trials and estimate the indirect contrast between treatments via the common comparator (standard care).
 :::
 
 . . .
 
 ::: {style="font-size: 85%; background-color: #e6f7ff; padding: 10px; border-left: 5px solid #0077b6;"}
-**In this talk**, we will introduce four methodological strategies for data fusion in this cross-trial setting.
+**In the following**, we will introduce four methodological strategies for data fusion in this cross-trial setting.
 :::
 
 ## Method Review
@@ -143,8 +142,12 @@ endTB trial $s = 1$ and TB-PRACTECAL trial $s = 2$ endTB trial $s = 1$ and TB-PR
   - $S=1$: endTB  
   - $S=2$: TB-PRACTECAL  
   - $\Omega$: target population of interest  
-  - $\Omega_s \subset \Omega$: population enrolled in trial $S=s$
+  - $\Omega_s \subset \Omega$: subpopulation enrolled in trial $S=s$
+:::
 
+. . .
+
+::: {style="font-size: 80%;"}
 **Variables**:
 
   - $A \in \mathcal{A}$: treatment received  
@@ -154,8 +157,8 @@ endTB trial $s = 1$ and TB-PRACTECAL trial $s = 2$ endTB trial $s = 1$ and TB-PR
   - $Y$: outcome (e.g., unfavorable outcome by end of follow-up)  
   - $L$: baseline covariates (measured pre-treatment)
 
- *Target Estimand*
-$\psi(a,b) = \mathbb{E}\!\left[ Y(a) - Y(b) \mid \Omega \right]$
+ <!-- *Target Estimand*
+$\psi(a,b) = \mathbb{E}\!\left[ Y(a) - Y(b) \mid \Omega \right]$ -->
 
 :::
 
@@ -164,12 +167,13 @@ $\psi(a,b) = \mathbb{E}\!\left[ Y(a) - Y(b) \mid \Omega \right]$
 
 ## Overview of four data fusion methods
 
-::: {style="font-size: 80%; background-color: #fff0f0; padding: 3px; border-left: 3px solid #b22222;"}
+::: {style="font-size: 80%; background-color: #fff0f0; padding: 2px; border-left: 2px solid #b22222;"}
 Target population of interest $\Omega$: consisting of individuals at risk of TB recurrence in countries hosting enrollment sites for <span style="background-color:#FFF2CC">either the endTB or TB-PRACTECAL trials <span>.
 :::
 
 ::: {style="font-size: 75%;"}
-$\Omega = \Omega_{s=1} \cup \Omega_{s=2},$ where $\Omega_{s=1}$ and $\Omega_{s=2}$ denote the target population of endTB and TB-PRACTECAL, respectively.
+<!-- $\Omega = \Omega_{s=1} \cup \Omega_{s=2},$ where $\Omega_{s=1}$ and $\Omega_{s=2}$ denote the subpopulation of endTB and TB-PRACTECAL, respectively. -->
+$\Omega = \Omega_{\text{TB-PRACTECAL}} \cup \Omega_{\text{endTB}}$
 :::
 
 . . .
@@ -246,22 +250,47 @@ Because control arms are ignored, identification relies entirely on covariate ad
 :::
 
 
-## Method (2): Direct and Indirect Fusion Method
+## Method: Direct and Indirect Method
 
 ::: {style="font-size: 85%;"}
-**The Core Idea**: What if we could combine data from both trials into one large dataset and then compare the treatments as if it were one big observational study?
+What if we could combine data from both trials into one large dataset and then compare the treatments of interests?
 
-That’s exactly what the Direct Fusion Method does:
 
 1.  **Merge the Data**: Pool individual patient data from TB-PRACTECAL and endTB.
-2.  **Treat as One Study**: Ignore which trial each patient came from, and directly compare 6BPaLM vs. the 9-month regimens.
-3.  **Adjust for Differences**: Since this isn’t a randomized experiment, we use statistical methods (like weighting) to “balance” the treatment groups and make the comparison fair.
 :::
 
 . . .
 
+::: {style="font-size: 85%;"}
+2.  <span style="background-color:#FFF2CC">Extending inferences from trial participants to a target population (i.e., $\Omega$).<span>
+:::
+
+. . .
+
+::: {style="font-size: 85%;"}
+Due to $\Omega = \Omega_{\text{TB-PRACTECAL}} \cup \Omega_{\text{endTB}},$ we use both
+
+- Generalizability: extension of inferences from the trial to a target population that coincides, or is a subset of, the trial-eligible population 
+
+and
+:::
+
+. . .
+
+::: {style="font-size: 85%;"}
+- Transportability: extension of inferences from the trial to
+a target population that includes individuals who are not
+part of the trial-eligible population.
+:::
+
+## Method: Direct and Indirect Method
+
+::: {style="font-size: 85%;"}
+<span style="background-color:#FFF2CC">In contrast to the trial emulation strategy, both the Direct and Indirect methods leverage randomization: the within trial randomization implies the conditional ramdomizaiton.<span>
+:::
+
 ::: {style="font-size: 85%; background-color: #e6f7ff; padding: 10px; border-left: 5px solid #0077b6;"}
-**key**: Pretend we have one large observational study with patients on either 6BPaLM or a 9-month regimen, then statistically adjust to make the groups comparable.
+In contrast to the trial emulation strategy, both the Direct and Indirect methods leverage randomization: the within trial randomization implies the conditional ramdomizaiton.
 :::
 
 ## Method (2B): Direct Method
@@ -276,15 +305,24 @@ If an individual actually receives treatment $a$, then their observed outcome $Y
 ::: {style="font-size: 85%;"}
 **Key Assumption 2: Exchangeability (unconfoundedness)**
 
-After we account for all important patient characteristics (age, disease severity, HIV status, etc.), **treatment assignment is unrelated to what outcomes would have been under different treatments**.
+$$Y(a)\perp\!\!\perp A\mid L, S=1\ \text{and}\ Y(b)\perp\!\!\perp A\mid L, S=2$$
 
-<span style="background-color:#FFF2CC">Can be ganrentted by randomization within each trial. </span>
+<span style="background-color:#FFF2CC"> Fortunately, this is guaranteed by randomization within each trial, no matter how many $L$s we measured. </span>
 :::
 
 . . .
 
 ::: {style="font-size: 85%;"}
-**Key Assumption 3: Transportability**: $Y(a),Y(b)\perp\!\!\perp S\mid L$
+Otherwise, if we do not have within trial randomization, we need to measure all important patient characteristics, **treatment assignment is unrelated to what outcomes would have been under different treatments**.
+
+
+:::
+
+
+## Key Assumptions (cts)
+::: {style="font-size: 85%;"}
+**Key Assumption 3: Transportability**: 
+$$Y(a),Y(b)\perp\!\!\perp S\mid L$$
 
 Information from patients on 6BPaLM in TB-PRACTECAL can tell us what would happen if endTB patients took 6BPaLM, and vice versa.
 
@@ -301,7 +339,7 @@ The patient populations from the two trials must be similar enough in important 
 ::: {style="font-size: 85%;"}
 **Key Assumption 4: Positivity — Treatment assignment**
 
-Within each trial, everyone must have a real chance to receive each treatment.
+Within each trial, everyone must have a non-zero probability to receive each treatment.
 :::
 
 . . .
@@ -309,7 +347,7 @@ Within each trial, everyone must have a real chance to receive each treatment.
 ::: {style="font-size: 85%;"}
 **Key Assumption 5: Positivity — Trial participation/inclusion**
 
-Across trials, everyone must have a real chance to be in either trial. 
+Across trials, everyone must have a non-zero probability to be in either trial. 
 
 No group of patients should exist only in one trial and never the other.
 
@@ -326,59 +364,39 @@ Identification of the parameter of interest $\psi$
     &= \mathbb{E}_{L\mid S=1}[\mathbb{E}(Y \mid A = a, L, S =1)] \mathbb{P}_{\Omega}(S=1) \\ &\ \ \ \ + \mathbb{E}_{L\mid S=2}[\mathbb{E}(Y \mid A = a, L, S =1)] \mathbb{P}_{\Omega}(S=2) \nonumber \\ &\ \ \ \ - \mathbb{E}_{L\mid S=1}[\mathbb{E}(Y \mid A = b, L, S =2)] \mathbb{P}_{\Omega}(S=1)  \\ &\ \ \ \ - \mathbb{E}_{L\mid S=2}[\mathbb{E}(Y \mid A = b, L, S =2)] \mathbb{P}_{\Omega}(S=2),
 \end{align}
 where $S=1$ indicates TB-PRACTECAL and $S=2$ indicates endTB.
-
-or equivalently, $\psi$ can be identified as the following IPW form
-\begin{align}\label{psiid2}
-\psi(a, b) &:=  \mathbb{E}[Y(a) - Y(b) \mid \Omega] \nonumber \\
-&= 
-\mathbb{E}\!\left[\frac{\mathbb{I}(A=a)\mathbb{I}(S=1)Y}{\mathbb{P}_{\Omega}(A=a \mid L, S=1)}\right]
-+ \mathbb{E}\!\left[\frac{\mathbb{I}(A=a)\mathbb{I}(S=1)Y\, \delta(L)}{\mathbb{P}_{\Omega}(A=a \mid L, S=1)}\right] \nonumber \\
-&\quad - \mathbb{E}\!\left[\frac{\mathbb{I}(A=b)\mathbb{I}(S=2)Y\, \delta^{-1}(L)}{\mathbb{P}_{\Omega}(A=b \mid L, S=2)}\right]- \mathbb{E}\!\left[\frac{\mathbb{I}(A=b)\mathbb{I}(S=2)Y}{\mathbb{P}_{\Omega}(A=b \mid L, S=2)}\right],
-\end{align}
-where $\delta(L):=
-\frac{\mathbb{P}_{\Omega}(S = 2 \mid L)}{\mathbb{P}_{\Omega}(S = 1 \mid L)} = \frac{1 - \mathbb{P}_{\Omega}(S = 1 \mid L)}{\mathbb{P}_{\Omega}(S = 1 \mid L)}.$
 :::
 
 
 
-## Estimation
+## Estimation 
 
 ::: {style="font-size: 85%;"}
-We implement the Direct Method using three estimation method (1) **g-computation** (2) **IPW** and (3) **one-step/doubly-robust estimation**:
+We consider three classes of estimators for the Direct contrast: 1. **G-computation**; 2. **Inverse Probability Weighting (IPW)**; 3. **One-step / Doubly-Robust estimator** (Appendix)
 
-**Doubly-Robust**: The one-step estimator is consistent if either the outcome model or the inclusion and treatment model is correctly specified.
+The first two approaches rely heavily on correct specification of either the outcome model (g-computation) or the inclusion/treatment model (IPW). 
 
-1. **Outcome Model**: Predicts what the outcome    would be under each treatment, given patient characteristics, $\mu_s(z, L) = \E(Y\mid L,A=z,S=s)$ for any $(s, z) \in \{(1, a), (2, b)\}.$
+To address their lack of robustness, we focus on a **one-step (doubly-robust) estimator** in the main analysis. This estimator:
 
-2. **Inclusion and Treatment Model**: The trial inclusion (i.e., $g(L) := \mathbb{P}_{\Omega}(S=1\mid L)$) and treatment mechanism (i.e., $\mathbb{P}_{\Omega}(A=z\mid L,S=s)$) are consistently estimated.
-
-Statistical properities of one-step estimator, such as consistency and asymptotic normality, are established under standard regularity conditions.
+* Remains consistent if **either** the outcome model **or** the inclusion model is correctly specified.
+* Can flexibly incorporate modern machine learning methods for nuisance estimation.
+* Provides valid large-sample inference under standard regularity conditions.
 :::
 
-. . .
+
+## Strengths & Limitations
+
+::: {style="font-size: 85%;"}
+
+| Method                      | Uses randomization | Uses all arms | Intuitive to clinicians | Doubly robust | Statistically efficient | Requires transportability |
+| --------------------------- | :----------------: | :-----------: | :---------------------: | :-----------: | :---------------------: | :-----------------------: |
+| **1A: Pooled-IPD Direct**   |          ✔         |       ✔       |            ✔            |       ✔       |            ✔            |             ✔             |
+| **1B: Pooled-IPD Indirect** |          ✔         |       ✔       |            △            |       ✔       |            ✔            |             ✔             |
+| **2: Trial Emulation**      |          ✖         |       ✖       |            ✔            |       △       |            △            |             ✔             |
+:::
 
 ::: {style="font-size: 85%; background-color: #f0f8ff; padding: 10px; border-left: 5px solid #4682b4;"}
-Treatment mechanism are known in randomized trials, so only the <span style="background-color:#FFF2CC">inclusion model and outcome model </span> need to be estimated "well", and the doubly-robust property ensures consistency if either is correct (see Appendix for the 2nd order remainder term).
+✔ = fully satisfied; • △ = partially satisfied; ✖ = not applicable
 :::
-
-## Strengths & Weaknesses
-
-::: {style="font-size: 85%;"}
-**Strengths**: 
-
-- **Intuitive**: Directly compares the treatments of interest—easy to explain to clinicians. 
-- **Uses All Data**: Leverages all treatment arms from both trials. 
-- **Doubly Robust**: More reliable, less sensitive to model misspecification. 
-- **Efficient**: Good statistical power, works well even with moderate sample sizes.
-- **Use Randomization**: Implicitly use the fact that the original trials were randomized.
-
-**Challenges & Limitations**: 
-
-- **Assumptions**: Transportability may not hold if trial populations differ substantially.  
-:::
-
-. . .
-
 
 ## Summary: Direct Method
 
@@ -406,9 +424,7 @@ Instead of directly comparing 6BPaLM vs. 9-month regimens, we break the problem 
 
 ::: {style="font-size: 85%; background-color: #e6f7ff; padding: 10px; border-left: 5px solid #0077b6;"}
 **Simple formula**:  
-Total difference = (Treatment effect difference) + (Standard care difference)
-
-**Mathematically**:  
+Total difference = (Treatment effect difference) + (Standard care difference), i.e., 
 $$\psi(a, b)= \theta + \phi $$ 
 where $\theta := \mathbb{E}[Y(a)-Y(c_1)\mid\Omega] - \mathbb{E}[Y(b)-Y(c_2)\mid\Omega]$, difference in treatment effects,
 and $\phi := \mathbb{E}[Y(c_1)-Y(c_2)\mid\Omega],$ the difference between the two standard care arms.
@@ -443,7 +459,7 @@ We can estimate $\phi$ using the **Direct Method** from before, since $\phi := \
 :::
 
 ## Identification Assumptions (for $\theta$ and $\phi$)
-
+::: {style="font-size: 85%;"}
 - **(A1) Consistency**  
 
 - **(A2) Exchangeability within each trial**  
@@ -452,15 +468,280 @@ We can estimate $\phi$ using the **Direct Method** from before, since $\phi := \
 
 - **(A3) Positivity of treatment within trial**  
 
-  Everyone in each trial has a non-zero chance to receive every treatment arm.
+  Everyone in each trial has a non-zero probability to receive every treatment arm.
 
 - **(A4) Transportability** : $Y(a),Y(c_1), Y(b), Y(c_2)\perp\!\!\perp S \mid L$
 
 - **(A5) Positivity of trial inclusion**  
 
-  For any covariate profile $L$, a subject must have a chance to be in both trials.
+  For any covariate profile $L$, a subject must have a non-zeor probability to be in both trials.
+:::
 
 
+## Strengths & Limitations
+
+::: {style="font-size: 85%;"}
+
+| Method                      | Uses randomization | Uses all arms | Intuitive to clinicians | Doubly robust | Statistically efficient | Requires transportability |
+| --------------------------- | :----------------: | :-----------: | :---------------------: | :-----------: | :---------------------: | :-----------------------: |
+| **1A: Pooled-IPD Direct**   |          ✔         |       ✔       |            ✔            |       ✔       |            ✔            |             ✔             |
+| **1B: Pooled-IPD Indirect** |          ✔         |       ✔       |            △            |       ✔       |            ✔            |             ✔             |
+| **2: Trial Emulation**      |          ✖         |       ✖       |            ✔            |       △       |            △            |             ✔             |
+:::
+
+::: {style="font-size: 85%; background-color: #f0f8ff; padding: 10px; border-left: 5px solid #4682b4;"}
+✔ = fully satisfied; • △ = partially satisfied; ✖ = not applicable
+:::
+
+
+
+## Summary: Indirect Method
+
+::: {style="font-size: 85%;"}
+
+The Indirect Method breaks the comparison into "how much better the treatments are than their respective standard cares" plus "how different those standard cares are from each other."
+
+**The Key Insight**:  
+By separating treatment effects from background care differences, we get a clearer picture of what is really driving any observed differences between 6BPaLM and 9-month regimens.
+:::
+
+. . .
+
+::: {style="font-size: 85%; background-color: #f0f8ff; padding: 10px; border-left: 5px solid #4682b4;"}
+**For Our Study**:  
+This method is particularly valuable because TB-PRACTECAL and endTB had different standard care regimens—something we can't ignore when comparing their results.
+:::
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## Comparison of Four Data-Fusion Methods 
+
+::: {style="font-size: 85%;"}
+**Target Population**
+
+| 1A Traditional    | 1B Observational  | 2A Indirect       | 2B Direct         |
+| ----------------- | ----------------- | ----------------- | ----------------- |
+| $\Omega$ (pooled) | $\Omega$ (pooled) | $\Omega$ (pooled) | $\Omega$ (pooled) |
+:::
+
+. . .
+
+::: {style="font-size: 85%;"}
+
+**Causal Estimand**
+
+* **(1A) Traditional:** contrast of trial-specific treatment effects
+  $\psi=\tau_a-\tau_b$
+
+* **(1B) Observational:** contrast in the treat-only population
+  $\psi=\tau'_a-\tau'_b$
+
+* **(2A) Indirect:**
+  $\psi=\theta+\phi$
+
+  * $\phi$: difference between controls across trials
+  * $\theta$: difference-in-differences of treatment effects
+
+* **(2B) Direct:**
+  $\psi=\E[Y(a)-Y(b)\mid\Omega]$
+:::
+
+
+
+## Comparison of Four Data-Fusion Methods 
+
+::: {style="font-size: 85%;"}
+
+**Standard Assumptions**
+
+Common to all methods:
+
+* **Consistency**
+* **Positivity within each trial**
+
+What differs:
+
+* **1A & 2A:** exchangeability holds *within each trial*
+* **1B:** exchangeability in the treat-only population
+* **2B:** exchangeability in the pooled population $\Omega$
+:::
+
+
+## Comparison of Four Data-Fusion Methods 
+
+::: {style="font-size: 85%;"}
+**Additional Targeting Conditions**
+
+* **1A:** requires a common control and equal contrasts across trials
+* **1B:** requires equality of treatment effect in $\Omega_{trt}$ and $\Omega$
+* **2A:** requires transportability for
+
+  * controls (given country $V$), and
+  * treatments (given $L$)
+* **2B:** requires transportability of treatment effects given $L$
+:::
+
+. . .
+
+::: {style="font-size: 85%;"}
+**Uses Randomization**
+
+| 1A             | 1B | 2A             | 2B |
+| -------------- | -- | -------------- | -- |
+| ✔ within-trial | ✖  | ✔ within-trial | ✔  within-trial|
+:::
+
+
+
+
+
+
+## Comparison of Four Data-Fusion Methods 
+
+::: {style="font-size: 85%;"}
+**Sample Size Usage**
+
+| Method               | How sample size is used                                                                          |
+| -------------------- | ------------------------------------------------------------------------------------------------ |
+| **1A Traditional**   | Uses **fully pooled IPD from all arms**, maximizing effective sample size.           |
+| **1B Observational** | Uses **all treated units** across trials but may discard controls for the main contrast.         |
+| **2A Indirect**      | Uses **fully pooled IPD from all arms**, maximizing effective sample size.   |
+| **2B Direct**        | Uses **fully pooled IPD from all arms**, maximizing effective sample size.                       |
+:::
+
+
+
+
+
+## Appendix
+::: {style="font-size: 85%;"}
+:::
+
+## Overview of source trials: TB-PRACTECAL vs. endTB
+
+::: {style="font-size: 85%;"}
+**TB-PRACTECAL** (Nyang’wa et al., 2022, 2024): 
+
+-  **Design**: Phase 2/3 non-inferiority RCT 
+-  **Countries**: South Africa, Belarus, Uzbekistan 
+-  **Regimens tested**: 6-month all-oral regimens vs. standard care 
+-  **Key finding**: 6BPaLM non-inferior to standard care 
+-  **Primary endpoint**: Composite unfavorable outcome at 72 weeks
+
+**endTB** (Guglielmetti et al., 2025): 
+
+-  **Design**: Phase 3 non-inferiority RCT 
+-  **Countries**: Georgia, India, Kazakhstan, Lesotho, Pakistan, Peru, South Africa 
+-  **Regimens tested**: 9-month all-oral regimens vs. standard care 
+-  **Key finding**: 9BLMZ, 9BCLLfxZ, 9BDLLfxZ non-inferior to standard care 
+-  **Primary endpoint**: Favorable outcome at 73 weeks
+:::
+
+
+## Key differences between trials
+
+::: {style="font-size: 85%;"}
+| Feature | TB-PRACTECAL | endTB |
+|---------------------|---------------------------------|------------------|
+| **Duration** | 6-month regimens | 9-month regimens |
+| **Standard care** | 9–12 or 18–20 month all-oral regimens (region-specific) | 18–20 month all-oral regimens (region-specific) |
+| **Study regions** | Eastern Europe, Central Asia, Southern Africa | South Asia, Latin America, Eastern Europe, Africa |
+| **Primary outcome** | Composite unfavorable outcome | Favorable outcome |
+| **Assessment time** | 72 weeks | 73 weeks |
+:::
+
+. . .
+
+::: {style="font-size: 85%;"}
+**Critical implication**: 
+
+- Standard care differs **both across regions and over time** 
+- Direct comparison is **not straightforward** due to differing controls 
+:::
+
+## Challenges for cross-trial data fusion
+
+::: {style="font-size: 85%;"}
+**1. No head-to-head comparison** - Trials compared regimens to **different standard-of-care arms** - No common treatment arm between trials
+
+**2. Heterogeneity in standard care** - Standard care varied by country and enrollment period - Changes in WHO guidelines during trial periods
+
+**3. Regional and population differences** - Limited overlap in study regions - Different background epidemiology, healthcare systems
+:::
+
+. . .
+
+::: {style="font-size: 85%; background-color: #fff0f0; padding: 10px; border-left: 5px solid #b22222;"}
+**We need causal data fusion methods** that can: 
+
+- Combine IPD from both trials 
+- Account for differing standard care 
+- Estimate direct contrasts between investigational regimens 
+:::
+
+## Identification Result (Statistical Estimand)
+
+::: {style="font-size: 85%;"}
+Identification of the parameter of interest $\psi$
+
+\begin{align}
+\psi(a, b) &:=  \mathbb{E}[Y(a) - Y(b) \mid \Omega] \nonumber \\
+    &= \mathbb{E}_{L\mid S=1}[\mathbb{E}(Y \mid A = a, L, S =1)] \mathbb{P}_{\Omega}(S=1) \\ &\ \ \ \ + \mathbb{E}_{L\mid S=2}[\mathbb{E}(Y \mid A = a, L, S =1)] \mathbb{P}_{\Omega}(S=2) \nonumber \\ &\ \ \ \ - \mathbb{E}_{L\mid S=1}[\mathbb{E}(Y \mid A = b, L, S =2)] \mathbb{P}_{\Omega}(S=1)  \\ &\ \ \ \ - \mathbb{E}_{L\mid S=2}[\mathbb{E}(Y \mid A = b, L, S =2)] \mathbb{P}_{\Omega}(S=2),
+\end{align}
+where $S=1$ indicates TB-PRACTECAL and $S=2$ indicates endTB.
+
+or equivalently, $\psi$ can be identified as the following IPW form
+\begin{align}\label{psiid2}
+\psi(a, b) &:=  \mathbb{E}[Y(a) - Y(b) \mid \Omega] \nonumber \\
+&= 
+\mathbb{E}\!\left[\frac{\mathbb{I}(A=a)\mathbb{I}(S=1)Y}{\mathbb{P}_{\Omega}(A=a \mid L, S=1)}\right]
++ \mathbb{E}\!\left[\frac{\mathbb{I}(A=a)\mathbb{I}(S=1)Y\, \delta(L)}{\mathbb{P}_{\Omega}(A=a \mid L, S=1)}\right] \nonumber \\
+&\quad - \mathbb{E}\!\left[\frac{\mathbb{I}(A=b)\mathbb{I}(S=2)Y\, \delta^{-1}(L)}{\mathbb{P}_{\Omega}(A=b \mid L, S=2)}\right]- \mathbb{E}\!\left[\frac{\mathbb{I}(A=b)\mathbb{I}(S=2)Y}{\mathbb{P}_{\Omega}(A=b \mid L, S=2)}\right],
+\end{align}
+where $\delta(L):=
+\frac{\mathbb{P}_{\Omega}(S = 2 \mid L)}{\mathbb{P}_{\Omega}(S = 1 \mid L)} = \frac{1 - \mathbb{P}_{\Omega}(S = 1 \mid L)}{\mathbb{P}_{\Omega}(S = 1 \mid L)}.$
+:::
+
+
+## Estimation
+
+::: {style="font-size: 85%;"}
+We implement the Direct Method using three estimation method (1) **g-computation** (2) **IPW** and (3) **one-step/doubly-robust estimation**:
+
+**Doubly-Robust**: The one-step estimator is consistent if either the outcome model or the inclusion and treatment model is correctly specified.
+
+1. **Outcome Model**: Predicts what the outcome    would be under each treatment, given patient characteristics, $\mu_s(z, L) = \E(Y\mid L,A=z,S=s)$ for any $(s, z) \in \{(1, a), (2, b)\}.$
+
+2. **Inclusion and Treatment Model**: The trial inclusion (i.e., $g(L) := \mathbb{P}_{\Omega}(S=1\mid L)$) and treatment mechanism (i.e., $\mathbb{P}_{\Omega}(A=z\mid L,S=s)$) are consistently estimated.
+
+Statistical properities of one-step estimator, such as consistency and asymptotic normality, are established under standard regularity conditions.
+:::
+
+. . .
+
+::: {style="font-size: 85%; background-color: #f0f8ff; padding: 10px; border-left: 5px solid #4682b4;"}
+Treatment mechanism are known in randomized trials, so only the <span style="background-color:#FFF2CC">inclusion model and outcome model </span> need to be estimated "well", and the doubly-robust property ensures consistency if either is correct.
+:::
 
 
 ## Identification of $\theta$
@@ -523,88 +804,4 @@ $\hat{\psi}(a, b)$ = $\hat{\theta}$ + $\hat{\phi}$
 
 ::: {style="font-size: 85%; background-color: #e6f7ff; padding: 10px; border-left: 5px solid #0077b6;"}
 When standard care differs substantially between trials, this method **explicitly accounts for that difference**, making it potentially more accurate than the traditional approach.
-:::
-
-
-## Summary: Indirect Method
-
-::: {style="font-size: 85%;"}
-
-The Indirect Method breaks the comparison into "how much better the treatments are than their respective standard cares" plus "how different those standard cares are from each other."
-
-**The Key Insight**:  
-By separating treatment effects from background care differences, we get a clearer picture of what is really driving any observed differences between 6BPaLM and 9-month regimens.
-:::
-
-. . .
-
-::: {style="font-size: 85%; background-color: #f0f8ff; padding: 10px; border-left: 5px solid #4682b4;"}
-**For Our Study**:  
-This method is particularly valuable because TB-PRACTECAL and endTB had different standard care regimens—something we can't ignore when comparing their results.
-:::
-
-
-
-
-
-## Overview of source trials: TB-PRACTECAL vs. endTB
-
-::: {style="font-size: 85%;"}
-**TB-PRACTECAL** (Nyang’wa et al., 2022, 2024): 
-
--  **Design**: Phase 2/3 non-inferiority RCT 
--  **Countries**: South Africa, Belarus, Uzbekistan 
--  **Regimens tested**: 6-month all-oral regimens vs. standard care 
--  **Key finding**: 6BPaLM non-inferior to standard care 
--  **Primary endpoint**: Composite unfavorable outcome at 72 weeks
-
-**endTB** (Guglielmetti et al., 2025): 
-
--  **Design**: Phase 3 non-inferiority RCT 
--  **Countries**: Georgia, India, Kazakhstan, Lesotho, Pakistan, Peru, South Africa 
--  **Regimens tested**: 9-month all-oral regimens vs. standard care 
--  **Key finding**: 9BLMZ, 9BCLLfxZ, 9BDLLfxZ non-inferior to standard care 
--  **Primary endpoint**: Favorable outcome at 73 weeks
-:::
-
-
-## Key differences between trials
-
-::: {style="font-size: 85%;"}
-| Feature | TB-PRACTECAL | endTB |
-|---------------------|---------------------------------|------------------|
-| **Duration** | 6-month regimens | 9-month regimens |
-| **Standard care** | 9–12 or 18–20 month all-oral regimens (region-specific) | 18–20 month all-oral regimens (region-specific) |
-| **Study regions** | Eastern Europe, Central Asia, Southern Africa | South Asia, Latin America, Eastern Europe, Africa |
-| **Primary outcome** | Composite unfavorable outcome | Favorable outcome |
-| **Assessment time** | 72 weeks | 73 weeks |
-:::
-
-. . .
-
-::: {style="font-size: 85%;"}
-**Critical implication**: 
-
-- Standard care differs **both across regions and over time** 
-- Direct comparison is **not straightforward** due to differing controls 
-:::
-
-## Challenges for cross-trial data fusion
-
-::: {style="font-size: 85%;"}
-**1. No head-to-head comparison** - Trials compared regimens to **different standard-of-care arms** - No common treatment arm between trials
-
-**2. Heterogeneity in standard care** - Standard care varied by country and enrollment period - Changes in WHO guidelines during trial periods
-
-**3. Regional and population differences** - Limited overlap in study regions - Different background epidemiology, healthcare systems
-:::
-
-. . .
-
-::: {style="font-size: 85%; background-color: #fff0f0; padding: 10px; border-left: 5px solid #b22222;"}
-**We need causal data fusion methods** that can: 
-
-- Combine IPD from both trials 
-- Account for differing standard care 
-- Estimate direct contrasts between investigational regimens 
 :::
