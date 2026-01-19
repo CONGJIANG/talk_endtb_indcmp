@@ -17,7 +17,7 @@ author:
     email: cjiang@hsph.harvard.edu
     affiliations: Harvard Biostatistics
   - name: Martha Boahene
-    orcid: 
+    orcid: 0009-0005-7317-0304
     email: mboahene@g.harvard.edu
     affiliations: Harvard Biostatistics
   - name: Nima Hejazi
@@ -133,6 +133,35 @@ Because a new head-to-head RCT is unlikely in the near term, we need to make the
 endTB trial $s = 1$ and TB-PRACTECAL trial $s = 2$ endTB trial $s = 1$ and TB-PRACTECAL trial and simple randome sapling from the target population $\Omega$ to each trial population $\Omega_{s=1}$ and $\Omega_{s=2}$.
 :::
 
+
+## Data Structure and Notation
+::: {style="font-size: 80%;"}
+
+**Indices and Populations**: 
+
+  - $S \in \{1,2\}$: trial indicator  
+  - $S=1$: endTB  
+  - $S=2$: TB-PRACTECAL  
+  - $\Omega$: target population of interest  
+  - $\Omega_s \subset \Omega$: population enrolled in trial $S=s$
+
+**Variables**:
+
+  - $A \in \mathcal{A}$: treatment received  
+  - $a$: 6BPaLM  
+  - $b$: endTB regimen (9BLMZ, 9BCLLfxZ, 9BDLLfxZ)  
+  - $c_s$: standard care in trial \(S=s\)  
+  - $Y$: outcome (e.g., unfavorable outcome by end of follow-up)  
+  - $L$: baseline covariates (measured pre-treatment)
+
+ *Target Estimand*
+$\psi(a,b) = \mathbb{E}\!\left[ Y(a) - Y(b) \mid \Omega \right]$
+
+:::
+
+
+
+
 ## Overview of four data fusion methods
 
 ::: {style="font-size: 80%; background-color: #fff0f0; padding: 3px; border-left: 3px solid #b22222;"}
@@ -180,23 +209,40 @@ What the traditional approach does:
 
 **Strength**: Uses randomization
 
-**Limitation**: Assume both endTB and TB-PRACTECAL has same control arm 
+**Limitation**: Assumes negligible differences in standard-care efficacy between endTB and TB-PRACTECAL
+
+
+This directly reflects $\mathbb{E}[Y(c_1) - Y(c_2)] = 0$
+
 :::
 
 
-## (1B) Observational Study Approach: Combine treatment arms
+## (1B) Target Trial Emulation Approach
 
 ::: {style="font-size: 85%;"}
-**The Core Idea**: Ignore control groups and directly compare people who received different treatments.
+**Core idea**: Construct an emulated trial by pooling treated arms across trials and analyzing the data as an observational study, following a target trial emulation protocol while ignoring standard-care arms.
 
-What the observational approach does:
+**Motivation**: Conducting a new head-to-head randomized trial is often infeasible.
+By discarding control arms and comparing treated groups directly, we extract maximal information from existing trials under explicit causal assumptions.
 
-1.  **Keep only treated participants**: keep people who received 6BPaLM and endTB regimen.
-2.  **Combine treated patients into one dataset**: Everyone in this dataset received an active treatment
-3. **Adjust for differences between patients**
-3. **Compare outcomes**: Differences are attributed to treatment, after adjustment
+**What this approach does**:
 
-**key**: We gain simplicity and efficiency by pooling treated arms, but we no longer use randomization—identification relies entirely on covariate adjustment. 
+- Specify a target trial protocol (eligibility, treatment strategies, outcome, follow-up).
+
+- Restrict data to treated participants.
+
+- Pool treated arms across trials to form a single analytic dataset.
+
+- Adjust for baseline covariates to control confounding.
+
+**Identification**
+
+- Exchangeability is assumed conditional on measured covariates.
+
+- Randomization is no longer used once control arms are discarded.
+
+**Limitation**
+Because control arms are ignored, identification relies entirely on covariate adjustment rather than randomization.
 :::
 
 
