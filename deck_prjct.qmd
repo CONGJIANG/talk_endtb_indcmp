@@ -122,9 +122,17 @@ Because a new head-to-head RCT is unlikely in the near term, we need to make the
 **In the following**, we will introduce four methodological strategies for data fusion in this cross-trial setting.
 :::
 
-## Method Review
+## Related Literature and Contribution
 
 ::: {style="font-size: 85%;"}
+- **External transportability**  
+  Prior work studies how to transport causal effects from multiple randomized trials to a **new external target population** where experimental data may not be available (Dahabreh et al., 2020, 2024; Cole & Stuart, 2010; Westreich et al., 2017).
+
+- **Common trial structure assumption**  
+  Much of the causal transportability and IPD meta-analysis literature considers settings where trials evaluate the **same treatment set or comparator**, which simplifies pooling or transport of treatment effects (e.g., Dahabreh et al., 2020).
+
+- **Our setting and contribution**  
+  We define an **internal target population** as the **union of participants from endTB and TB-PRACTECAL** and focus on cross-trial causal comparison. The trials are **disconnected**, with **country- and trial-specific standards of care** and no guaranteed shared comparator. We compare four data-fusion strategies by combining ideas from transportability, target trial emulation (Hernán & Robins, 2016), and IPD meta-analysis (Riley et al., 2010).
 :::
 
 ## Data Structure and Notation
@@ -804,4 +812,33 @@ $\hat{\psi}(a, b)$ = $\hat{\theta}$ + $\hat{\phi}$
 
 ::: {style="font-size: 85%; background-color: #e6f7ff; padding: 10px; border-left: 5px solid #0077b6;"}
 When standard care differs substantially between trials, this method **explicitly accounts for that difference**, making it potentially more accurate than the traditional approach.
+:::
+
+## Target Trial Emulation (Aim 1: PLHIV)  
+### Design, Eligibility, and Treatment
+ Criteria for emulating a target trial using endTB and TB-PRACTECAL RCTs.
+
+::: {.small}
+| Component | Target Trial (Ideal) | Emulated Trial (Real) |
+|---|---|---|
+| **Eligibility (baseline)** | | |
+| Inclusion | Age ≥ 15; rifampin-resistant; fluoroquinolone-susceptible; baseline labs grade ≤ 4; HIV seropositive | Same |
+| Exclusion | Pregnancy; elevated liver enzymes; QTcF ≥ 450 msec; uncorrectable electrolyte disorders; on MDR/RR-TB treatment ≥ 2 weeks; investigator discretion | Same |
+| **Treatment strategies** | 6BPaLM; 9BLMZ; 9BCLLfxZ; 9BDLLfxZ | Same |
+| **Assignment** | Randomized (1:1:1:1), stratified by country/region | IPTW using key baseline covariates |
+|}
+:::
+## Target Trial Emulation  
+### Follow-up, Estimands, and Analysis
+
+**Table 1b.** Follow-up, outcomes, and causal contrasts for the emulated trial.
+
+::: {.small}
+| Component | Target Trial (Ideal) | Emulated Trial (Real) |
+|---|---|---|
+| **Time zero & follow-up** | Time zero: first dose initiation; follow-up ends at primary endpoint, censoring, or administrative study end | Same, with 1-week grace period (72/73 weeks) |
+| **Outcome** | WHO composite outcome | Same |
+| **Causal contrasts** | ITT: 6BPaLM vs 9BLMZ; 6BPaLM vs 9BCLLfxZ; 6BPaLM vs 9BDLLfxZ | Same, constructed as a single four-arm study in mITT population |
+| **Statistical analysis** | ITT analysis | ITT with IPCW for censoring adjustment |
+|
 :::
