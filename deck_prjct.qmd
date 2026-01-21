@@ -107,13 +107,17 @@ Because a new head-to-head RCT is unlikely in the near term, we need to make the
 
 ::: {style="font-size: 85%;"}
 **Primary aim**: Compare the efficacy of 6BPaLM versus endTB regimen (9BLMZ, 9BCLLfxZ, 9BDLLfxZ).
+:::
 
+. . .
+
+::: {style="font-size: 85%;"}
 **Approaches**: 
 
   - **Meta-analytic** approach: apply **meta analysis** to estimate direct contrasts.
   - **Target trial emulation** approach: use target trial emulation framework (Hernán & Robins, 2016), then analysis as an observational study. 
   - **Pooled-IPD “direct” strategy**: Pool individual patient data (IPD) from both trials and estimate the direct head-to-head contrast between the two treatments of intests.
-  - **Pooled-IPD “indirect” strategy**: Pool IPD from both trials and estimate the indirect contrast between treatments via the common comparator (standard care).
+  - **Pooled-IPD “indirect” strategy**: Pool IPD from both trials and estimate the indirect contrast between treatments <span style="background-color:#FFF2CC">via the common comparator (standard care)<span>.
 :::
 
 . . .
@@ -125,32 +129,43 @@ Because a new head-to-head RCT is unlikely in the near term, we need to make the
 ## Related Literature and Contribution
 
 ::: {style="font-size: 85%;"}
-- **External transportability**  
-  Prior work studies how to transport causal effects from multiple randomized trials to a **new external target population** where experimental data may not be available (Dahabreh et al., 2020, 2024; Cole & Stuart, 2010; Westreich et al., 2017).
+- **Transportability**  
+  Prior work studies how to transport causal effects from multiple randomized trials to a **new target population** where experimental data may not be available (Dahabreh et al., 2020, 2024; Cole & Stuart, 2010; Westreich et al., 2017). [@hernan2016] [@dahabreh2019extending]
+:::
 
+. . .
+
+::: {style="font-size: 85%;"}
 - **Common trial structure assumption**  
   Much of the causal transportability and IPD meta-analysis literature considers settings where trials evaluate the **same treatment set or comparator**, which simplifies pooling or transport of treatment effects (e.g., Dahabreh et al., 2020).
-
-- **Our setting and contribution**  
-  We define an **internal target population** as the **union of participants from endTB and TB-PRACTECAL** and focus on cross-trial causal comparison. The trials are **disconnected**, with **country- and trial-specific standards of care** and no guaranteed shared comparator. We compare four data-fusion strategies by combining ideas from transportability, target trial emulation (Hernán & Robins, 2016), and IPD meta-analysis (Riley et al., 2010).
 :::
 
-## Data Structure and Notation
+. . .
+
 ::: {style="font-size: 85%;"}
-endTB trial $s = 1$ and TB-PRACTECAL trial $s = 2$ endTB trial $s = 1$ and TB-PRACTECAL trial and simple randome sapling from the target population $\Omega$ to each trial population $\Omega_{s=1}$ and $\Omega_{s=2}$.
+- **Our setting and contribution**  
+
+  - We define a **target population** as the **union of participants from endTB and TB-PRACTECAL** and focus on cross-trial causal comparison. 
+  - We compare four strategies by combining ideas from *generalizability, transportability, target trial emulation, and IPD meta-analysis* (Hernán & Robins, 2016) (Riley et al., 2010).
+  In particular, standard cares comparison can be solved in our framework by appropriately adjusting for differences.
 :::
+
+<!-- ## Data Structure and Notation
+::: {style="font-size: 85%;"}
+endTB trial $s = 1$ and TB-PRACTECAL trial $s = 2$ endTB trial $s = 1$ and TB-PRACTECAL trial and simple random sampling from the target population $\Omega$ to each trial population $\Omega_{s=1}$ and $\Omega_{s=2}$.
+::: -->
 
 
 ## Data Structure and Notation
 ::: {style="font-size: 80%;"}
 
-**Indices and Populations**: 
+**Populations**: 
 
   - $S \in \{1,2\}$: trial indicator  
   - $S=1$: endTB  
   - $S=2$: TB-PRACTECAL  
   - $\Omega$: target population of interest  
-  - $\Omega_s \subset \Omega$: subpopulation enrolled in trial $S=s$
+  - $\Omega_s \subset \Omega$: subpopulation of $\Omega$ enrolled in trial $S=s$
 :::
 
 . . .
@@ -190,7 +205,7 @@ $\Omega = \Omega_{\text{TB-PRACTECAL}} \cup \Omega_{\text{endTB}}$
 
 | Method | Key Idea | Target Population |
 |--------------|----------------------------------------------------|------------|
-| **(1) Meta-analytic Approach** | Compare each treatment v.s. its own control in each trial, then difference the effects | $\Omega$ (Pooled) |
+| **(1) Traditional Approach** | Compare each treatment v.s. its own control in each trial, then difference the effects | $\Omega$ (Pooled) |
 | **(2) Target trial emulation Approach** | Combine treatment arms, analyze as an observational study | $\Omega$ (Pooled) |
 | **(3) Direct Method** | Estimate direct contrast by pooling data and adjusting for trial differences | $\Omega$ (Pooled) |
 | **(4) Indirect Method** | Decompose contrast into treatment effect difference + control effect difference | $\Omega$ (Pooled) |
@@ -208,15 +223,14 @@ $\Omega = \Omega_{\text{TB-PRACTECAL}} \cup \Omega_{\text{endTB}}$
 **Next**: We will examine each method in detail—their causal assumptions, statistical estimand, estimators, and implications for our cross-trial comparison.
 ::: -->
 
-## (1A) Traditional approach: Separate trial analyses
+## Method 1: Traditional approach
 
 ::: {style="font-size: 85%;"}
 **The Core Idea**: Use randomization within each trial, then difference the estimated effects.
 
 What the traditional approach does:
 
-1.  **Analyze each trial separately**: Calculate within trial effect with data from TB-PRACTECAL
-    and endTB separately.
+1.  **Analyze each trial separately**: Calculate within trial effect with data from TB-PRACTECAL and endTB separately.
 2.  **Compare the two results**: Take the difference between the two trial-specific effects.
 
 **Strength**: Uses randomization
@@ -224,12 +238,12 @@ What the traditional approach does:
 **Limitation**: Assumes negligible differences in standard-care efficacy between endTB and TB-PRACTECAL
 
 
-This directly reflects $\mathbb{E}[Y(c_1) - Y(c_2)] = 0$
+This directly reflects the common comparator: $\mathbb{E}[Y(c_1) - Y(c_2) \mid \Omega] = 0$
 
 :::
 
 
-## (1B) Target Trial Emulation Approach
+## Method 2: Target Trial Emulation Approach
 
 ::: {style="font-size: 85%;"}
 **Core idea**: Construct an emulated trial by pooling treated arms across trials and analyzing the data as an observational study, following a target trial emulation protocol while ignoring standard-care arms.
@@ -258,7 +272,7 @@ Because control arms are ignored, identification relies entirely on covariate ad
 :::
 
 
-## Method: Direct and Indirect Method
+## Method 3 and 4: Direct and Indirect Method
 
 ::: {style="font-size: 85%;"}
 What if we could combine data from both trials into one large dataset and then compare the treatments of interests?
@@ -278,7 +292,7 @@ What if we could combine data from both trials into one large dataset and then c
 ::: {style="font-size: 85%;"}
 Due to $\Omega = \Omega_{\text{TB-PRACTECAL}} \cup \Omega_{\text{endTB}},$ we use both
 
-- Generalizability: extension of inferences from the trial to a target population that coincides, or is a subset of, the trial-eligible population 
+- Generalizability: extension of inferences from the trial to a target population that coincides, or is a subset of, the trial-eligible population [@hernan2016] [@dahabreh2019extending]
 
 and
 :::
@@ -288,20 +302,20 @@ and
 ::: {style="font-size: 85%;"}
 - Transportability: extension of inferences from the trial to
 a target population that includes individuals who are not
-part of the trial-eligible population.
+part of the trial-eligible population. [@dahabreh2019extending]
 :::
 
 ## Method: Direct and Indirect Method
 
 ::: {style="font-size: 85%;"}
-<span style="background-color:#FFF2CC">In contrast to the trial emulation strategy, both the Direct and Indirect methods leverage randomization: the within trial randomization implies the conditional ramdomizaiton.<span>
+In contrast to the trial emulation strategy, both the Direct and Indirect methods leverage randomization: <span style="background-color:#FFF2CC">the within trial randomization implies the conditional ramdomizaiton.<span>
 :::
 
 ::: {style="font-size: 85%; background-color: #e6f7ff; padding: 10px; border-left: 5px solid #0077b6;"}
 In contrast to the trial emulation strategy, both the Direct and Indirect methods leverage randomization: the within trial randomization implies the conditional ramdomizaiton.
 :::
 
-## Method (2B): Direct Method
+## Method 3: Direct Method
 
 ::: {style="font-size: 85%;"}
 **Key Assumption 1: Consistency**
@@ -313,15 +327,15 @@ If an individual actually receives treatment $a$, then their observed outcome $Y
 ::: {style="font-size: 85%;"}
 **Key Assumption 2: Exchangeability (unconfoundedness)**
 
-$$Y(a)\perp\!\!\perp A\mid L, S=1\ \text{and}\ Y(b)\perp\!\!\perp A\mid L, S=2$$
+$$Y(a)\perp\!\!\perp A\mid (L, S=1),\ \text{and}\ Y(b)\perp\!\!\perp A\mid (L, S=2)$$
 
-<span style="background-color:#FFF2CC"> Fortunately, this is guaranteed by randomization within each trial, no matter how many $L$s we measured. </span>
+<span style="background-color:#FFF2CC"> Fortunately, this is guaranteed by randomization within each trial, no matter how many covariates we measured. </span>
 :::
 
 . . .
 
 ::: {style="font-size: 85%;"}
-Otherwise, if we do not have within trial randomization, we need to measure all important patient characteristics, **treatment assignment is unrelated to what outcomes would have been under different treatments**.
+Otherwise, if we do not have within trial randomization, we need to measure all important patient characteristics ($L$s), **treatment assignment is unrelated to what outcomes would have been under different treatments**.
 
 
 :::
@@ -369,9 +383,15 @@ If a certain kind of patient (say very sick patients) can only ever appear in tr
 Identification of the parameter of interest $\psi$
 \begin{align}\label{psiid}
 \psi(a, b) &:=  \mathbb{E}[Y(a) - Y(b) \mid \Omega] \nonumber \\
-    &= \mathbb{E}_{L\mid S=1}[\mathbb{E}(Y \mid A = a, L, S =1)] \mathbb{P}_{\Omega}(S=1) \\ &\ \ \ \ + \mathbb{E}_{L\mid S=2}[\mathbb{E}(Y \mid A = a, L, S =1)] \mathbb{P}_{\Omega}(S=2) \nonumber \\ &\ \ \ \ - \mathbb{E}_{L\mid S=1}[\mathbb{E}(Y \mid A = b, L, S =2)] \mathbb{P}_{\Omega}(S=1)  \\ &\ \ \ \ - \mathbb{E}_{L\mid S=2}[\mathbb{E}(Y \mid A = b, L, S =2)] \mathbb{P}_{\Omega}(S=2),
+    &= \mathbb{E}_{L\mid S=1}[\mathbb{E}(Y \mid A = a, L, S =1)] \mathbb{P}_{\Omega}(S=1) \\&\ \ \ \ - \mathbb{E}_{L\mid S=1}[\mathbb{E}(Y \mid A = b, L, S =2)] \mathbb{P}_{\Omega}(S=1)  \\ &\ \ \ \ + \mathbb{E}_{L\mid S=2}[\mathbb{E}(Y \mid A = a, L, S =1)] \mathbb{P}_{\Omega}(S=2) \nonumber \\ &\ \ \ \ - \mathbb{E}_{L\mid S=2}[\mathbb{E}(Y \mid A = b, L, S =2)] \mathbb{P}_{\Omega}(S=2),
 \end{align}
 where $S=1$ indicates TB-PRACTECAL and $S=2$ indicates endTB.
+:::
+
+. . .
+
+::: {style="font-size: 85%;"}
+For the first two term, 
 :::
 
 
@@ -382,7 +402,11 @@ where $S=1$ indicates TB-PRACTECAL and $S=2$ indicates endTB.
 We consider three classes of estimators for the Direct contrast: 1. **G-computation**; 2. **Inverse Probability Weighting (IPW)**; 3. **One-step / Doubly-Robust estimator** (Appendix)
 
 The first two approaches rely heavily on correct specification of either the outcome model (g-computation) or the inclusion/treatment model (IPW). 
+:::
 
+. . .
+
+::: {style="font-size: 85%;"}
 To address their lack of robustness, we focus on a **one-step (doubly-robust) estimator** in the main analysis. This estimator:
 
 * Remains consistent if **either** the outcome model **or** the inclusion model is correctly specified.
@@ -547,7 +571,7 @@ This method is particularly valuable because TB-PRACTECAL and endTB had differen
 ::: {style="font-size: 85%;"}
 **Target Population**
 
-| 1A Traditional    | 1B Observational  | 2A Indirect       | 2B Direct         |
+| 1 Traditional    | 2 Observational  | 3 Indirect       | 4 Direct         |
 | ----------------- | ----------------- | ----------------- | ----------------- |
 | $\Omega$ (pooled) | $\Omega$ (pooled) | $\Omega$ (pooled) | $\Omega$ (pooled) |
 :::
@@ -558,20 +582,18 @@ This method is particularly valuable because TB-PRACTECAL and endTB had differen
 
 **Causal Estimand**
 
-* **(1A) Traditional:** contrast of trial-specific treatment effects
-  $\psi=\tau_a-\tau_b$
+* **(1) Traditional:** contrast of trial-specific treatment effects.
 
-* **(1B) Observational:** contrast in the treat-only population
-  $\psi=\tau'_a-\tau'_b$
+* **(2) Observational:** contrast in the treat-only population.
 
-* **(2A) Indirect:**
+* **(3) Direct:**
+  $\psi=\E[Y(a)-Y(b)\mid\Omega]$
+
+* **(4) Indirect:**
   $\psi=\theta+\phi$
 
   * $\phi$: difference between controls across trials
   * $\theta$: difference-in-differences of treatment effects
-
-* **(2B) Direct:**
-  $\psi=\E[Y(a)-Y(b)\mid\Omega]$
 :::
 
 
@@ -589,9 +611,9 @@ Common to all methods:
 
 What differs:
 
-* **1A & 2A:** exchangeability holds *within each trial*
-* **1B:** exchangeability in the treat-only population
-* **2B:** exchangeability in the pooled population $\Omega$
+* **1 & 2:** exchangeability holds *within each trial*
+* **3:** exchangeability in the treat-only population
+* **4:** exchangeability in the pooled population $\Omega$
 :::
 
 
@@ -600,7 +622,7 @@ What differs:
 ::: {style="font-size: 85%;"}
 **Additional Targeting Conditions**
 
-* **1A:** requires a common control and equal contrasts across trials
+* **1:** requires a common control and equal contrasts across trials
 * **1B:** requires equality of treatment effect in $\Omega_{trt}$ and $\Omega$
 * **2A:** requires transportability for
 
@@ -814,7 +836,7 @@ $\hat{\psi}(a, b)$ = $\hat{\theta}$ + $\hat{\phi}$
 When standard care differs substantially between trials, this method **explicitly accounts for that difference**, making it potentially more accurate than the traditional approach.
 :::
 
-## Target Trial Emulation (Aim 1: PLHIV)  
+## Target Trial Emulation  
 ### Design, Eligibility, and Treatment
  Criteria for emulating a target trial using endTB and TB-PRACTECAL RCTs.
 
@@ -826,9 +848,9 @@ When standard care differs substantially between trials, this method **explicitl
 | Exclusion | Pregnancy; elevated liver enzymes; QTcF ≥ 450 msec; uncorrectable electrolyte disorders; on MDR/RR-TB treatment ≥ 2 weeks; investigator discretion | Same |
 | **Treatment strategies** | 6BPaLM; 9BLMZ; 9BCLLfxZ; 9BDLLfxZ | Same |
 | **Assignment** | Randomized (1:1:1:1), stratified by country/region | IPTW using key baseline covariates |
-|}
+|
 :::
-## Target Trial Emulation  
+## Target Trial Emulation (cts)
 ### Follow-up, Estimands, and Analysis
 
 **Table 1b.** Follow-up, outcomes, and causal contrasts for the emulated trial.
