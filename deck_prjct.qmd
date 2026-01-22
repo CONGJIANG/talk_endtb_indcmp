@@ -130,7 +130,7 @@ Because a new head-to-head RCT is unlikely in the near term, we need to make the
 
 ::: {style="font-size: 85%;"}
 - **Transportability**  
-  Prior work studies how to transport causal effects from multiple randomized trials to a **new target population** where experimental data may not be available (Dahabreh et al., 2020, 2024; Cole & Stuart, 2010; Westreich et al., 2017). [@hernan2016] [@dahabreh2019extending]
+  Prior work studies how to transport causal effects from multiple randomized trials to a **new target population** where experimental data may not be available  [@hernan2016] [@dahabreh2019extending]
 :::
 
 . . .
@@ -421,9 +421,9 @@ To address their lack of robustness, we focus on a **one-step (doubly-robust) es
 
 | Method                      | Uses randomization | Uses all arms | Intuitive to clinicians | Doubly robust | Statistically efficient | Requires transportability |
 | --------------------------- | :----------------: | :-----------: | :---------------------: | :-----------: | :---------------------: | :-----------------------: |
-| **1A: Pooled-IPD Direct**   |          ✔         |       ✔       |            ✔            |       ✔       |            ✔            |             ✔             |
-| **1B: Pooled-IPD Indirect** |          ✔         |       ✔       |            △            |       ✔       |            ✔            |             ✔             |
-| **2: Trial Emulation**      |          ✖         |       ✖       |            ✔            |       △       |            △            |             ✔             |
+| **1: Pooled-IPD Direct**   |          ✔         |       ✔       |            ✔            |       ✔       |            ✔            |             ✔             |
+| **2: Pooled-IPD Indirect** |          ✔         |       ✔       |            △            |       ✔       |            ✔            |             ✔             |
+| **3: Trial Emulation**      |          ✖         |       ✖       |            ✔            |       △       |            △            |             ✔             |
 :::
 
 ::: {style="font-size: 85%; background-color: #f0f8ff; padding: 10px; border-left: 5px solid #4682b4;"}
@@ -439,7 +439,7 @@ The Direct Method lets us “directly compare” treatments that were never test
 :::
 
 
-## Method (2A): Indirect Method – decomposition for adjusting differing standard care
+## Method (3): Indirect Method – decomposition for adjusting differing standard care
 
 ::: {style="font-size: 85%;"}
 **The Core Idea**:
@@ -516,9 +516,9 @@ We can estimate $\phi$ using the **Direct Method** from before, since $\phi := \
 
 | Method                      | Uses randomization | Uses all arms | Intuitive to clinicians | Doubly robust | Statistically efficient | Requires transportability |
 | --------------------------- | :----------------: | :-----------: | :---------------------: | :-----------: | :---------------------: | :-----------------------: |
-| **1A: Pooled-IPD Direct**   |          ✔         |       ✔       |            ✔            |       ✔       |            ✔            |             ✔             |
-| **1B: Pooled-IPD Indirect** |          ✔         |       ✔       |            △            |       ✔       |            ✔            |             ✔             |
-| **2: Trial Emulation**      |          ✖         |       ✖       |            ✔            |       △       |            △            |             ✔             |
+| **1: Pooled-IPD Direct**   |          ✔         |       ✔       |            ✔            |       ✔       |            ✔            |             ✔             |
+| **2: Pooled-IPD Indirect** |          ✔         |       ✔       |            △            |       ✔       |            ✔            |             ✔             |
+| **3: Trial Emulation**      |          ✖         |       ✖       |            ✔            |       △       |            △            |             ✔             |
 :::
 
 ::: {style="font-size: 85%; background-color: #f0f8ff; padding: 10px; border-left: 5px solid #4682b4;"}
@@ -623,12 +623,12 @@ What differs:
 **Additional Targeting Conditions**
 
 * **1:** requires a common control and equal contrasts across trials
-* **1B:** requires equality of treatment effect in $\Omega_{trt}$ and $\Omega$
-* **2A:** requires transportability for
+* **2:** requires equality of treatment effect in $\Omega_{trt}$ and $\Omega$
+* **3:** requires transportability for
 
   * controls (given country $V$), and
   * treatments (given $L$)
-* **2B:** requires transportability of treatment effects given $L$
+* **4:** requires transportability of treatment effects given $L$
 :::
 
 . . .
@@ -636,7 +636,7 @@ What differs:
 ::: {style="font-size: 85%;"}
 **Uses Randomization**
 
-| 1A             | 1B | 2A             | 2B |
+| 1             | 2 | 3             | 4 |
 | -------------- | -- | -------------- | -- |
 | ✔ within-trial | ✖  | ✔ within-trial | ✔  within-trial|
 :::
@@ -653,10 +653,10 @@ What differs:
 
 | Method               | How sample size is used                                                                          |
 | -------------------- | ------------------------------------------------------------------------------------------------ |
-| **1A Traditional**   | Uses **fully pooled IPD from all arms**, maximizing effective sample size.           |
-| **1B Observational** | Uses **all treated units** across trials but may discard controls for the main contrast.         |
-| **2A Indirect**      | Uses **fully pooled IPD from all arms**, maximizing effective sample size.   |
-| **2B Direct**        | Uses **fully pooled IPD from all arms**, maximizing effective sample size.                       |
+| **1 Traditional**   | Uses **fully pooled IPD from all arms**, maximizing effective sample size.           |
+| **2 Observational** | Uses **all treated units** across trials but may discard controls for the main contrast.         |
+| **3 Indirect**      | Uses **fully pooled IPD from all arms**, maximizing effective sample size.   |
+| **4 Direct**        | Uses **fully pooled IPD from all arms**, maximizing effective sample size.                       |
 :::
 
 
