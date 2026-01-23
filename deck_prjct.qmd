@@ -297,7 +297,7 @@ What if we could combine data from both trials into one large dataset and then c
 . . .
 
 ::: {style="font-size: 85%;"}
-Due to $\Omega = \Omega_{\text{TB-PRACTECAL}} \cup \Omega_{\text{endTB}},$ we use law of total expectation and **transportability**.
+Due to $\Omega = \Omega_{\text{TB-PRACTECAL}} \cup \Omega_{\text{endTB}},$ we use law of total expectation/probability to decompose $\Omega$ into each trial's population and then apply **transportability**.
 :::
 
 . . .
@@ -306,12 +306,11 @@ Due to $\Omega = \Omega_{\text{TB-PRACTECAL}} \cup \Omega_{\text{endTB}},$ we us
 
 Recall the definitions [@hernan2016; @dahabreh2019extending]:
 
-- **Generalizability:** extension of inferences from the trial to a target population that coincides, or is a subset of, the trial-eligible population 
+- **Generalizability:** extension of inferences from the trial to a target population that *coincides, or is a subset of*, the trial-eligible population 
 
 
 - **Transportability:** extension of inferences from the trial to
-a target population that includes individuals who are not
-part of the trial-eligible population. 
+a target population that *includes individuals who are not part* of the trial-eligible population. 
 :::
 
 <!-- ## Method: Direct and Indirect Method
@@ -324,7 +323,7 @@ In contrast to the trial emulation strategy, both the Direct and Indirect method
 In contrast to the trial emulation strategy, both the Direct and Indirect methods leverage randomization: the within trial randomization implies the conditional ramdomizaiton.
 ::: -->
 
-## Method 3: Direct Method
+## Method 3: Direct Method for $\psi(a, b)$
 
 ::: {style="font-size: 85%;"}
 **Key Assumption 1: Consistency**
@@ -641,6 +640,11 @@ This method is particularly valuable because TB-PRACTECAL and endTB had differen
 | **Statistical analysis** | ITT analysis | ITT with IPCW for censoring adjustment |
 |
 :::
+
+
+## Comparison of Methods {.appendix}
+
+![](figs/comparison.png){width=77% fig-align="center" .lightbox}
 
 
 ## Overview of source trials: TB-PRACTECAL vs. endTB {.appendix}
