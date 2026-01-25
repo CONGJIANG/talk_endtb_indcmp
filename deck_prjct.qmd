@@ -83,9 +83,8 @@ We have individual patient data (IPD) from two non-inferiority RCTs:
 |---------------------|---------------------------------|------------------|
 | **Duration** | 6-month regimens | 9-month regimens |
 | **Standard care** | 9–12 or 18–20 month all-oral regimens (region-specific) | 18–20 month all-oral regimens (region-specific) |
-| **Study regions** | Eastern Europe, Central Asia, Southern Africa | South Asia, Latin America, Eastern Europe, Africa |
-| **Primary outcome** | Composite unfavorable outcome | Favorable outcome |
-| **Assessment time** | 72 weeks | 73 weeks |
+| **Study regions** | Uzbekistan, Belarus, South Africa | Georgia, India, Kazakhstan, Lesotho, Pakistan, Peru, South Africa |
+| **Follow-up time** | At least 72 weeks | At least 73 weeks |
 :::
 
 . . .
@@ -167,7 +166,6 @@ endTB trial $s = 1$ and TB-PRACTECAL trial $s = 2$ endTB trial $s = 1$ and TB-PR
   - $S=1$: endTB  
   - $S=2$: TB-PRACTECAL  
   - $\Omega$: target population of interest  
-  - $\Omega_s \subset \Omega$: subpopulation of $\Omega$ enrolled in trial $S=s$
 :::
 
 . . .
@@ -216,8 +214,7 @@ $\Omega = \Omega_{\text{TB-PRACTECAL}} \cup \Omega_{\text{endTB}}$
 . . .
 
 ::: {style="font-size: 80%;"}
-**All methods aim to estimate the casual estimand**: $$\psi(a, b) = \mathbb{E}[Y(a) - Y(b) \mid \Omega],$$ where $Y(a)$ denotes the potential outcome under the 6BPaLM regimen, $Y(b)$ denotes the potential outcome under an endTB regimen (9BLMZ, 9BCLLfxZ, or 9BDLLfxZ).
-:::
+**All methods aim to estimate the casual estimand**: $$\psi(a, b) = \mathbb{E}[Y(a) - Y(b) \mid \Omega],$$ 
 
 <!-- . . .
 
