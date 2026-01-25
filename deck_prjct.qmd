@@ -487,7 +487,7 @@ $\color{#6b72ff}{\mathbb{E}_{L\mid S=1}}[ {\color{#FF6B6B}{\mathbb{E}(Y \mid A =
 ::: {style="font-size: 85%;"}
 - Using ${\color{#FF6B6B}{\textbf{Trial 2}}}$ data, fit an outcome model for $Y$ given treatment $A=b$ and covariates $L$.
 
-- Apply that same model to each patient in ${\color{#6b72ff}{\textbf{Trial 1}}}$ to get their predicted outcome under treatment *b*.
+- Apply that same model to each patient in ${\color{#6b72ff}{\textbf{Trial 1}}}$ to get their predicted outcome under treatment ${\color{#FF6B6B}{b}}$.
 
 - Average those predictions across all ${\color{#6b72ff}{\textbf{Trial 1}}}$ patients.
 :::
@@ -583,7 +583,7 @@ The indirect method uses an identification strategy similar to the direct method
 **Additional Targeting Conditions**
 
 * **1 (Traditional):** requires a common control and equal contrasts across trials
-* **2 (Trial Emulation):** requires equality of treatment effect in $\Omega_{trt}$ and $\Omega$
+* **2 (Trial Emulation):** requires equality of treatment effect in $\Omega_{trt}$ and $\Omega_{untrt}$
 * **3 (Direct):** requires transportability of treatment effects given $L$
 
 * **4 (Indirect):** requires transportability for (1) controls (given country $V$), and (2) treatments (given $L$)
