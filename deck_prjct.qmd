@@ -6,6 +6,7 @@ format:
     slide-number: c
     preview-links: auto
     logo: figs/hsph.png
+    # margin: 0.04
     footer: "TB Grupito Meeting"
     smaller: false
     incremental: false
@@ -282,32 +283,32 @@ By discarding control arms and comparing treated groups directly, we extract max
 ## Methods 3 and 4: Direct and Indirect Approaches
 
 ::: {style="font-size: 85%;"}
-What if we could combine data from both trials into one large dataset and then compare the treatments of interests?
+<!-- What if we could combine data from both trials into one large dataset and then compare the treatments of interests? -->
 
 
-1.  **Merge the Data**: Pool individual patient data from TB-PRACTECAL and endTB.
+Merge the data from TB-PRACTECAL and endTB, and <span style="background-color:#FFF2CC"> extend inferences from trial participants to a target population (i.e., $\Omega$).<span>
 :::
 
 . . .
 
 ::: {style="font-size: 85%;"}
-2.  <span style="background-color:#FFF2CC">Extending inferences from trial participants to a target population (i.e., $\Omega$).<span>
+Due to $\Omega = \Omega_{\text{TB-PRACTECAL}} \cup \Omega_{\text{endTB}},$ we  
+
+- (1) use law of total expectation to decompose $\Omega$ into each trial's population;
 :::
 
 . . .
 
 ::: {style="font-size: 85%;"}
-Due to $\Omega = \Omega_{\text{TB-PRACTECAL}} \cup \Omega_{\text{endTB}},$ we use law of total expectation/probability to decompose $\Omega$ into each trial's population and then apply **transportability**.
+- (2) apply **transportability** to answer questions such as: *“What would be the average treatment effect if the endTB participants had received the TB-PRACTECAL intervention?”*
 :::
 
 . . .
 
 ::: {style="font-size: 85%;"}
-
 Recall the definitions [@hernan2016; @dahabreh2019extending]:
 
 - **Generalizability:** extension of inferences from the trial to a target population that *coincides, or is a subset of*, the trial-eligible population 
-
 
 - **Transportability:** extension of inferences from the trial to
 a target population that *includes individuals who are not part* of the trial-eligible population. 
@@ -337,7 +338,7 @@ If an individual actually receives treatment $a$, then their observed outcome $Y
 
 $$Y(a)\perp\!\!\perp A\mid (L, S=1),\ \text{and}\ Y(b)\perp\!\!\perp A\mid (L, S=2)$$
 
-If we do not have within trial randomization, we need to measure all important patient characteristics ($L$s) to ensure **treatment assignment is unrelated to what outcomes would have been under different treatments**.
+If we do not have within trial randomization, we need to measure all important patient characteristics ($L$) to ensure **treatment assignment is unrelated to what outcomes would have been under different treatments**.
 :::
 
 . . .
@@ -350,18 +351,21 @@ marginal randomization implies this weaker assumption.
 
 ## Key Assumptions of Method 3
 ::: {style="font-size: 85%;"}
-**Key Assumption 3: Transportability**: 
+**Key Assumption 3: Transportability (Conditional exchangeability over selection)**: 
 $$Y(a),Y(b)\perp\!\!\perp S\mid L$$
 
-Information from patients on 6BPaLM in TB-PRACTECAL can tell us what would happen if endTB patients took 6BPaLM, and vice versa.
+**Explanation**: What we learn about a treatment in one trial can be applied to patients in the other trial, given measured covariates.
 
-**Explanation**: What we learn about a treatment in one trial can be applied to patients in the other trial.
+
+*Information from patients on 6BPaLM in TB-PRACTECAL can tell us what would happen if endTB patients took 6BPaLM, and vice versa.*
+
+
 :::
 
 . . .
 
 ::: {style="font-size: 85%; background-color: #fff0f0; padding: 10px; border-left: 5px solid #b22222;"}
-The patient populations from the two trials must be similar enough in important characteristics that we can safely "borrow" information across them. *If the trials studied very different types of patients, this method will fail.*
+Any systematic differences between trials that are not captured in the measured covariates $L$ will break this assumption.
 :::
 
 ## Key Assumptions of Method 3
@@ -488,7 +492,7 @@ The Direct Method lets us “directly compare” treatments that were never test
 :::
 
 
-## Method (4): Indirect Method – decomposition for adjusting differing standard care
+## Method (4): Indirect Method
 
 ::: {style="font-size: 85%;"}
 **The Core Idea**:
@@ -504,105 +508,54 @@ Instead of directly comparing 6BPaLM vs. 9-month regimens, we break the problem 
 . . .
 
 ::: {style="font-size: 85%; background-color: #e6f7ff; padding: 10px; border-left: 5px solid #0077b6;"}
-**Simple formula**:  
-Total difference = (Treatment effect difference) + (Standard care difference), i.e., 
-$$\psi(a, b)= \theta + \phi $$ 
-where $\theta := \mathbb{E}[Y(a)-Y(c_1)\mid\Omega] - \mathbb{E}[Y(b)-Y(c_2)\mid\Omega]$, difference in treatment effects,
-and $\phi := \mathbb{E}[Y(c_1)-Y(c_2)\mid\Omega],$ the difference between the two standard care arms.
+**Simple formula**:  Total difference = (Treatment effect difference) + (Standard care difference), i.e., 
+$\psi(a, b)= \theta + \phi,$
+where 
+(1) $$\theta := \mathbb{E}[Y(a)-Y(c_1)\mid\Omega] - \mathbb{E}[Y(b)-Y(c_2)\mid\Omega],$$ difference in treatment effects,
+and (2) $\phi := \mathbb{E}[Y(c_1)-Y(c_2)\mid\Omega],$ the difference between the two standard care arms.
 :::
-
-## The Two Components: A Closer Look
-::: {style="font-size: 85%;"}
-
-- **Component 1: Treatment Effect Difference ($\theta$)**
-  - In **TB-PRACTECAL**: 6BPaLM v.s. Standard Care 1
-  - In **endTB**: 9-month regimen v.s. Standard Care 2
-  - Captures how much better each investigational regimen is compared to its own control, i.e., $\theta := \mathbb{E}[Y(a)-Y(c_1)\mid\Omega] - \mathbb{E}[Y(b)-Y(c_2)\mid\Omega]$
-
- - $(\text{Effect of 6BPaLM vs. SC1}) - (\text{Effect of 9-month regimen vs. SC2})$
-:::
-
-. . .
-
-::: {style="font-size: 85%;"}
-- **Component 2: Standard Care Difference ($\phi$)**
-  - Direct comparison: Standard Care 1 vs. Standard Care 2
-  - Captures differences in background treatment across trials
-
-- $\phi := \mathbb{E}[Y(c_1)-Y(c_2)\mid\Omega]$
-:::
-
-. . .
-
-::: {style="font-size: 85%; background-color: #fff0f0; padding: 10px; border-left: 5px solid #b22222;"}
-**Fact of Component 2**:  
-We can estimate $\phi$ using the **Direct Method** from before, since $\phi := \mathbb{E}\left[ Y(c_1) - Y(c_2) \mid \Omega \right]$ coincides with the pairwise contrast $\phi = \psi(c_1, c_2)$. 
-:::
-
-## Identification Assumptions (for $\theta$ and $\phi$)
-::: {style="font-size: 85%;"}
-- **(A1) Consistency**  
-
-- **(A2) Exchangeability within each trial**  
-  - Trial 1: $Y(a), Y(c_1)\perp\!\!\perp A \mid L,S=1$  
-  - Trial 2: $Y(b), Y(c_2)\perp\!\!\perp A \mid L,S=2$
-
-- **(A3) Positivity of treatment within trial**  
-
-  Everyone in each trial has a non-zero probability to receive every treatment arm.
-
-- **(A4) Transportability** : $Y(a),Y(c_1), Y(b), Y(c_2)\perp\!\!\perp S \mid L$
-
-- **(A5) Positivity of trial inclusion**  
-
-  For any covariate profile $L$, a subject must have a non-zeor probability to be in both trials.
-:::
-
 
 
 
 ## Summary: Indirect Method
 
 ::: {style="font-size: 85%;"}
-
-The Indirect Method breaks the comparison into "how much better the treatments are than their respective standard cares" plus "how different those standard cares are from each other."
-
-**The Key Insight**:  
-By separating treatment effects from background care differences, we get a clearer picture of what is really driving any observed differences between 6BPaLM and 9-month regimens.
+The indirect method uses an identification strategy similar to the direct method, but must account for both **treatment effect difference** $\theta$ and **standard care difference** $\phi$.
 :::
 
 . . .
 
-::: {style="font-size: 85%; background-color: #f0f8ff; padding: 10px; border-left: 5px solid #4682b4;"}
-**For Our Study**:  
-This method is particularly valuable because TB-PRACTECAL and endTB had different standard care regimens, something we can't ignore when comparing their results.
+::: {style="font-size: 85%;"}
+**Fact of Component 2**:  we can indentify and estimate $\phi$ using the **Direct Method** from before, since $\phi := \mathbb{E}\left[ Y(c_1) - Y(c_2) \mid \Omega \right]$ coincides with the pairwise contrast $$\phi = \psi(c_1, c_2).$$
 :::
-
 
 ## Strengths & Limitations
 
 ::: {style="font-size: 85%;"}
 
-| Method                      | Uses randomization | Uses all arms | Intuitive to clinicians | Statistically efficient | More Assumption | Requires transportability |
-| --------------------------- | :----------------: | :-----------: | :---------------------: | :-----------: | :---------------------: | :-----------------------: |
-| **1: Traditional Approach**      |          ✔          |       ✔        |            ✔            |       △       |            △            |             ✖             |
-| **2: Trial Emulation**      |          ✖         |       ✖       |            ✔            |       △       |            △            |             ✖             |
-| **3: Pooled-IPD Direct**   |          ✔         |       ✔       |            ✔            |       ✔       |            ✔            |             ✔             |
-| **4: Pooled-IPD Indirect** |          ✔         |       ✔       |            △            |       ✔       |            ✔            |             ✔             |
+| Method                      | Uses randomization | Uses all arms data| Intuitive | Statistically efficient | More Assumption | 
+| --------------------------- | :----------------: | :-----------: | :---------------------: | :-----------: | :---------------------: | 
+| **1: Traditional Approach**      |          ✔          |       ✔        |            ✔            |       △       |            △            |
+| **2: Trial Emulation**      |          ✖         |       ✖       |            ✔            |       △       |            △            |
+| **3: Pooled-IPD Direct**   |          ✔         |       ✔       |            ✔            |       ✔       |            ✔            |
+| **4: Pooled-IPD Indirect** |          ✔         |       ✔       |            △            |       ✔       |            ✔            |
 :::
 
 ::: {style="font-size: 85%; background-color: #f0f8ff; padding: 10px; border-left: 5px solid #4682b4;"}
 ✔ = fully satisfied; • △ = partially satisfied; ✖ = not applicable
 :::
 
+. . .
 
+::: {style="font-size: 85%;"}
+**Additional Targeting Conditions**
 
+* **1 (Traditional):** requires a common control and equal contrasts across trials
+* **2 (Trial Emulation):** requires equality of treatment effect in $\Omega_{trt}$ and $\Omega$
+* **3 (Direct):** requires transportability of treatment effects given $L$
 
-
-
-
-
-
+* **4 (Indirect):** requires transportability for (1) controls (given country $V$), and (2) treatments (given $L$)
+:::
 
 ## References {.smaller footer="false"}
 
