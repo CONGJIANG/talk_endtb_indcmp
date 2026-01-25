@@ -182,7 +182,6 @@ endTB trial $s = 1$ and TB-PRACTECAL trial $s = 2$ endTB trial $s = 1$ and TB-PR
 
  <!-- *Target Estimand*
 $\psi(a,b) = \mathbb{E}\!\left[ Y(a) - Y(b) \mid \Omega \right]$ -->
-
 :::
 
 
@@ -214,8 +213,8 @@ $\Omega = \Omega_{\text{TB-PRACTECAL}} \cup \Omega_{\text{endTB}}$
 . . .
 
 ::: {style="font-size: 80%;"}
-**All methods aim to estimate the casual estimand**: $$\psi(a, b) = \mathbb{E}[Y(a) - Y(b) \mid \Omega],$$ 
-
+**All methods aim to estimate the casual estimand**: $$\psi(a, b) = \mathbb{E}[Y(a) - Y(b) \mid \Omega].$$ 
+:::
 <!-- . . .
 
 ::: {style="font-size: 80%; background-color: #e6f7ff; padding: 10px; border-left: 5px solid #0077b6;"}
