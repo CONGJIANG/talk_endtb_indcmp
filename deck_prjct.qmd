@@ -548,19 +548,6 @@ and (2) $\phi := \mathbb{E}[Y(c_1)-Y(c_2)\mid\Omega],$ the difference between th
 :::
 
 
-
-## Summary: Indirect Method
-
-::: {style="font-size: 85%;"}
-The indirect method uses an identification strategy similar to the direct method, but must account for both **treatment effect difference** $\theta$ and **standard care difference** $\phi$.
-:::
-
-. . .
-
-::: {style="font-size: 85%;"}
-**Fact of Component 2**:  we can indentify and estimate $\phi$ using the **Direct Method** from before, since $\phi := \mathbb{E}\left[ Y(c_1) - Y(c_2) \mid \Omega \right]$ coincides with the pairwise contrast $$\phi = \psi(c_1, c_2).$$
-:::
-
 ## Strengths & Limitations
 
 ::: {style="font-size: 85%;"}
@@ -583,7 +570,7 @@ The indirect method uses an identification strategy similar to the direct method
 **Additional Targeting Conditions**
 
 * **1 (Traditional):** requires a common control and equal contrasts across trials
-* **2 (Trial Emulation):** requires equality of treatment effect in $\Omega_{trt}$ and $\Omega_{untrt}$
+* **2 (Trial Emulation):** exchangeability is assumed conditional on measured covariates.
 * **3 (Direct):** requires transportability of treatment effects given $L$
 
 * **4 (Indirect):** requires transportability for (1) controls (given country $V$), and (2) treatments (given $L$)
@@ -1018,3 +1005,16 @@ What differs:
 | **4 Direct**        | Uses **fully pooled IPD from all arms**, maximizing effective sample size.                       |
 :::
 
+
+
+## Summary: Indirect Method
+
+::: {style="font-size: 85%;"}
+The indirect method uses an identification strategy similar to the direct method, but must account for both **treatment effect difference** $\theta$ and **standard care difference** $\phi$.
+:::
+
+. . .
+
+::: {style="font-size: 85%;"}
+**Fact of Component 2**:  we can indentify and estimate $\phi$ using the **Direct Method** from before, since $\phi := \mathbb{E}\left[ Y(c_1) - Y(c_2) \mid \Omega \right]$ coincides with the pairwise contrast $$\phi = \psi(c_1, c_2).$$
+:::
