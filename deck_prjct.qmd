@@ -45,11 +45,11 @@ csl: https://www.zotero.org/styles/journal-of-the-royal-statistical-society
 ::: {style="font-size: 85%;"}
 Recent trials introduced **short-course, all-oral regimens**:
 
-- **TB-PRACTECAL** (Nyang’wa et al., 2022, 2024)  
+- **TB-PRACTECAL** [@nyangwa_24-week_2022;@nyangwa_short_2024]
   - 6-month regimen: **6BPaLM** (Bedaquiline + Pretomanid + Linezolid + Moxifloxacin)
   - Non-inferior vs standard care
 
-- **endTB** (Guglielmetti et al., 2025)  
+- **endTB** [@guglielmetti_oral_2025] 
   - 9-month regimens: **9BLMZ, 9BCLLfxZ, 9BDLLfxZ**
   - Non-inferior vs standard care
 
