@@ -351,10 +351,10 @@ marginal randomization implies this weaker assumption.
 
 ## Key Assumptions of Method 3
 ::: {style="font-size: 85%;"}
-**Key Assumption 3: Transportability (Conditional exchangeability over selection)**: 
+**Key Assumption 3: Transportability (Conditional exchangeability over inclusion)**: 
 $$Y(a),Y(b)\perp\!\!\perp S\mid L$$
 
-**Explanation**: What we learn about a treatment in one trial can be applied to patients in the other trial, given measured covariates.
+What we learn about a treatment in one trial can be applied to patients in the other trial, given measured covariates.
 
 
 *Information from patients on 6BPaLM in TB-PRACTECAL can tell us what would happen if endTB patients took 6BPaLM, and vice versa.*
@@ -390,9 +390,7 @@ If a certain kind of patient (say very sick patients) can only ever appear in tr
 
 ## Identification Result (Statistical Estimand)
 
-
 ::: {style="font-size: 85%;"}
-Identification of the parameter of interest $\psi$
 \begin{align}\label{psiid}
 \psi(a, b) &:=  \mathbb{E}[Y(a) - Y(b) \mid \Omega] \nonumber \\
     &= \mathbb{E}_{L\mid S=1}[\mathbb{E}(Y \mid A = a, L, S =1)] \color{#E69F00}{\mathbb{P}_{\Omega}(S=1)} \\&\ \ \ \ - \mathbb{E}_{L\mid S=1}[\mathbb{E}(Y \mid A = b, L, S =2)] \color{#E69F00}{\mathbb{P}_{\Omega}(S=1)}  \\ &\ \ \ \ + \mathbb{E}_{L\mid S=2}[\mathbb{E}(Y \mid A = a, L, S =1)] \color{#6b72ff}{\mathbb{P}_{\Omega}(S=2)} \nonumber \\ &\ \ \ \ - \mathbb{E}_{L\mid S=2}[\mathbb{E}(Y \mid A = b, L, S =2)] \color{#6b72ff}{\mathbb{P}_{\Omega}(S=2)},
@@ -425,8 +423,6 @@ where subgroup-specific conditional means, i.e., $\color{#6b72ff}{\mathbb{E}(Y \
 
 :::
 
-
-
 . . .
 
 ::: {style="font-size: 85%;"}
@@ -435,6 +431,26 @@ $\color{#6b72ff}{\mathbb{E}_{L\mid S=1}}[ \mathbb{E}(Y \mid A = a, L, S =1)]$ is
 \begin{align}
 {\color{#6b72ff}{\mathbb{E}(Y \mid A = a, L = l, S =1)} * \mathbb{P}(L = l \mid S=1)}.
 \end{align}
+:::
+
+## Identification Result (G-computation)
+::: {style="font-size: 85%;"}
+$\color{#6b72ff}{\mathbb{E}_{L\mid S=1}}[ \mathbb{E}(Y \mid A = a, L, S =1)]$ is
+
+\begin{align}
+{\color{#6b72ff}{\sum_{l: \mathbb{P}(l, S=1) \neq 0 }\mathbb{E}(Y \mid A = a, L = l, S =1)} * \mathbb{P}(L = l \mid S=1)}.
+\end{align}
+
+:::
+
+. . .
+
+::: {style="font-size: 85%;"}
+- Fit a model using ${\color{#6b72ff}{\textbf{Trial 1}}}$ data to predict the outcome $Y$ given treatment $A=a$ and covariates $L$.
+
+- Apply that same model to each patient in ${\color{#6b72ff}{\textbf{Trial 1}}}$ to get their predicted outcome under treatment *a*.
+
+- Average those predictions across all ${\color{#6b72ff}{\textbf{Trial 1}}}$ patients.
 :::
 
 
@@ -460,6 +476,26 @@ $\color{#6b72ff}{\mathbb{E}_{L\mid S=1}}[ {\color{#FF6B6B}{\mathbb{E}(Y \mid A =
 \end{align}
 :::
 
+## Identification Result (G-computation)
+::: {style="font-size: 85%;"}
+$\color{#6b72ff}{\mathbb{E}_{L\mid S=1}}[ {\color{#FF6B6B}{\mathbb{E}(Y \mid A = b, L, S =2)}}]$ is 
+
+\begin{align}
+\color{#6b72ff}{\sum_{l: \mathbb{P}(l, S=1) \neq 0 } } \color{#FF6B6B}{ \mathbb{E}(Y \mid A = b, L = l, S =2)} * \color{#6b72ff}{\mathbb{P}(L = l \mid S=1)}.
+\end{align}
+
+:::
+
+. . .
+
+::: {style="font-size: 85%;"}
+- Using ${\color{#FF6B6B}{\textbf{Trial 2}}}$ data, fit an outcome model for $Y$ given treatment $A=b$ and covariates $L$.
+
+- Apply that same model to each patient in ${\color{#6b72ff}{\textbf{Trial 1}}}$ to get their predicted outcome under treatment *b*.
+
+- Average those predictions across all ${\color{#6b72ff}{\textbf{Trial 1}}}$ patients.
+:::
+
 ## Estimation 
 
 ::: {style="font-size: 85%;"}
@@ -469,7 +505,7 @@ We consider three classes of estimators for the Direct contrast:
 2. **Inverse Probability Weighting (IPW)**; 
 3. **Causal machine learning estimator** (Appendix)
 
-The first two approaches rely heavily on correct specification of either the outcome model (g-computation) or the inclusion/treatment model (IPW). 
+The first two approaches rely heavily on correct specification of either the outcome model (g-computation) or the inclusion&treatment model (IPW). 
 :::
 
 . . .
@@ -478,24 +514,24 @@ The first two approaches rely heavily on correct specification of either the out
 To address their lack of robustness, we focus on a **causal machine learning estimator** in the main analysis. This estimator:
 
 * Can flexibly incorporate modern machine learning methods for nuisance estimation.
-* Double Robustness: remains consistent if **either** the outcome model **or** the inclusion model is correctly specified.
-* Provides valid large-sample inference under standard regularity conditions.
+* **Double Robustness**: remains consistent if **either** the outcome model **or** the *inclusion model* is correctly specified.
+* Provides **valid** large-sample inference under standard regularity conditions.
 :::
 
 
-## Summary: Direct Method
+<!-- ## Summary: Direct Method
 
 ::: {style="font-size: 85%;"}
 The Direct Method lets us “directly compare” treatments that were never tested head-to-head in the same trial, by combining trial data and applying advanced statistical adjustment.
 
 **For Our Research**: This is **a straightforward and robust approach** to answer whether 6BPaLM is preferable to 9-month regimens for people living with HIV, provided the trial populations are sufficiently similar.
-:::
+::: -->
 
 
 ## Method (4): Indirect Method
 
 ::: {style="font-size: 85%;"}
-**The Core Idea**:
+
 Instead of directly comparing 6BPaLM vs. 9-month regimens, we break the problem into **two parts**:
 
 1. **The difference in treatment effects**  
