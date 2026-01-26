@@ -573,7 +573,7 @@ and (2) $\phi := \mathbb{E}[Y(c_1)-Y(c_2)\mid\Omega],$ the difference between th
 * **2 (Trial Emulation):** exchangeability is assumed conditional on measured covariates.
 * **3 (Direct):** requires transportability of treatment effects given $L$
 
-* **4 (Indirect):** requires transportability of (1) standard care effects (given country $V$), and (2) treatment-control contrasts (given $L$)
+* **4 (Indirect):** requires transportability of (1) standard care effects (e.g., given country $V$), and (2) treatment-control contrasts (given $L$)
 :::
 
 ## References {.smaller footer="false"}
