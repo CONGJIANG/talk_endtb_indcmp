@@ -499,7 +499,7 @@ We consider three classes of estimators for the Direct contrast:
 
 1. **G-computation**; 
 2. **Inverse Probability Weighting (IPW)**; 
-3. **Causal machine learning estimator** (Appendix)
+3. **Causal machine learning estimator**.
 
 The first two approaches rely heavily on correct specification of either the outcome model (g-computation) or the inclusion&treatment model (IPW). 
 :::
