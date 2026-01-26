@@ -444,7 +444,7 @@ $\color{#6b72ff}{\mathbb{E}_{L\mid S=1}}[ \mathbb{E}(Y \mid A = a, L, S =1)]$ is
 ::: {style="font-size: 85%;"}
 - Fit a model using ${\color{#6b72ff}{\textbf{Trial 1}}}$ data to predict the outcome $Y$ given treatment $A=a$ and covariates $L$.
 
-- Apply that same model to each patient in ${\color{#6b72ff}{\textbf{Trial 1}}}$ to get their predicted outcome under treatment *a*.
+- Apply that same model to each patient in ${\color{#6b72ff}{\textbf{Trial 1}}}$ to get their predicted outcome under treatment ${\color{#6b72ff}{a}}$.
 
 - Average those predictions across all ${\color{#6b72ff}{\textbf{Trial 1}}}$ patients.
 :::
